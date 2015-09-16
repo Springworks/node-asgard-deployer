@@ -2,13 +2,19 @@
   "name": "asgard-deployer",
   "version": "0.0.1",
   "description": "Executes automated deployments in Asgard",
-  "main": "index.js",
+  "main": "deploy.js",
   "scripts": {
-    "test": "test"
+    "lint": "eslint .",
+    "test": "NODE_ENV=test istanbul cover _mocha"
   },
-  "author": "Kristofer Sommestad <kristofer@sommestad.com> (http://sommestad.net)",
+  "engines": {
+    "npm": ">=2.7.0"
+  },
+  "author": "Springworks",
   "license": "MIT",
   "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.2",
     "@springworks/test-harness": "1.0.3",
     "eslint": "1.4.3",
     "eslint-config-springworks": "2.6.0",
