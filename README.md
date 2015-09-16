@@ -6,6 +6,8 @@ Executes automated deployments in [Asgard](https://github.com/Netflix/asgard).
 
 - `NODE_ENV_ASGARD_DEPLOYER_ASGARD_HOST`, e.g. `https://asgard.mydomain.com`
 - `NODE_ENV_ASGARD_DEPLOYER_AWS_REGION`, e.g. `eu-west-1`
+- `NODE_ASGARD_DEPLOYER_ASGARD_USERNAME`, username if Asgard is behind basic auth
+- `NODE_ASGARD_DEPLOYER_ASGARD_PASSWORD`, password if Asgard is behind basic auth
 
 ## Execution of deployment
 
