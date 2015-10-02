@@ -11,6 +11,10 @@
   "engines": {
     "npm": ">=2.7.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Springworks/node-asgard-deployer.git"
+  },
   "author": "Springworks",
   "license": "MIT",
   "devDependencies": {
@@ -20,7 +24,10 @@
     "coveralls": "^2.11.4",
     "eslint": "1.5.1",
     "eslint-config-springworks": "3.1.1",
-    "eslint-plugin-mocha": "1.0.0"
+    "eslint-plugin-mocha": "1.0.0",
+    "eslint-plugin-should-promised": "^1.0.5",
+    "istanbul": "^0.3.21",
+    "mocha": "^2.3.3"
   },
   "dependencies": {
     "@springworks/api-client": "^5.0.2",
