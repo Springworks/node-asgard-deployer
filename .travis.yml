@@ -1,0 +1,14 @@
+sudo: false
+language: node_js
+node_js:
+- '0.12'
+- '4'
+script:
+- npm run lint
+- npm test
+after_success:
+- npm run coveralls
+notifications:
+  email: false
+  slack:
+    secure: YQCcDkuLUBmrdThHcTDFsHl+r58YbUtVpn248FKbVxGsaXBwNpqglT3d+ehPANJ4g+0bS+cgeeyFhjpu1aXzsgJS4uYwcpSJvDLheEpcd9lq0Tc+VtvF/ul2ASgVPGyi9a32WFth9Xy75xh4/rKxr/9j+SRMm+ugERBjsVPy8MZLGnRPyw4RDs9RctBDxoTYj1H0U1/W+XBhrYPHHFBAFh9p15uXCyYnXf7DV19iMD0FDelZzKEAWcAOwJMg++gFwfe1w8MnLlcAVD9jm16bVB2xe5sET4s0yTBbqAw9tPW8fSGLG5GMc51noRESf/GjZPRrk6F1GB76uaPLnqQijEHvod3+q6dKsUSEhcCXRRCnMUpH++MnyIAp4jxxx2huniWepcqw6am4ZSL4V3ak7Slx7hASq2z26efX7MHSRxpqFw+2opDM7Cv0Vr3nbZc1jCMcr3p5c11DVW2wPDYlIslzEA7HCZRm33BdtISJy+qcqvnpZP2ocDuISsUXI9nkWqcQLF0rBZ8sHh+argqsRG4C3DejhtFf+hxsKGasXBs3diHJRpk6Jc9kFXp+ufTlGi2gGZ1EC6ZKgW6ve65EI3MXCTxJ6jak63XoeDY49ErLRaheY9vpwBvXwqYolluZGh5Wb5IF5tZTirRd7wA17lDLj4USpbQqMPZy04de4Ro=
