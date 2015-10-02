@@ -5,7 +5,8 @@
   "main": "deploy.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "NODE_ENV=test istanbul cover _mocha"
+    "test": "NODE_ENV=test istanbul cover _mocha",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
     "npm": ">=2.7.0"
@@ -16,6 +17,7 @@
     "@springworks/test-harness": "1.0.3",
     "babel": "^5.8.23",
     "babel-eslint": "^4.1.2",
+    "coveralls": "^2.11.4",
     "eslint": "1.5.1",
     "eslint-config-springworks": "3.1.1",
     "eslint-plugin-mocha": "1.0.0"
