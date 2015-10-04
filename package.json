@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@springworks/api-client": "^5.0.2",
-    "@springworks/logger-factory": "^3.1.2"
+    "@springworks/logger-factory": "^3.1.2",
+    "bluebird": "^2.10.2"
   }
 }
