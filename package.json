@@ -2,7 +2,7 @@
   "name": "asgard-deployer",
   "version": "0.0.1",
   "description": "Executes automated deployments in Asgard",
-  "main": "deployer.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "test": "NODE_ENV=test istanbul cover _mocha",
