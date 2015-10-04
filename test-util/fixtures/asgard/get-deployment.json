@@ -1,0 +1,46 @@
+{
+  "id": "1051",
+  "clusterName": "messenger",
+  "region": "eu-west-1",
+  "workflowExecution": {
+    "workflowId": "5a01730c-3791-42fb-81f9-cfabc34d551a",
+    "runId": "22t5VokU8Ef5juUBWl7+EMBDMYdOXeEeJzzJMT+4e0HVY="
+  },
+  "description": "Deploying new ASG to cluster 'messenger'",
+  "owner": null,
+  "startTime": 1425023390000,
+  "updateTime": 1425023390000,
+  "status": "running",
+  "log": [],
+  "steps": [
+    {
+      "type": "CreateAsg"
+    },
+    {
+      "type": "Resize",
+      "targetAsg": "Next",
+      "capacity": 2,
+      "startUpTimeoutMinutes": 40
+    },
+    {
+      "type": "Wait",
+      "durationMinutes": 10,
+      "description": null
+    },
+    {
+      "type": "DisableAsg",
+      "targetAsg": "Previous"
+    },
+    {
+      "type": "DeleteAsg",
+      "targetAsg": "Previous"
+    }
+  ],
+  "token": null,
+  "regionCode": "eu-west-1",
+  "logForSteps": [
+    []
+  ],
+  "durationString": "1m 14s",
+  "done": false
+}

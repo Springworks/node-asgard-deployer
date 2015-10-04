@@ -1,0 +1,6 @@
+{
+  "extends": "springworks/babel",
+  "rules": {
+
+  }
+}

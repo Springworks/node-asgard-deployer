@@ -1,0 +1,4348 @@
+{
+  "lcOptions": {
+    "launchConfigurationName": null,
+    "imageId": "ami-5e39e529",
+    "keyName": "m2hkey",
+    "securityGroups": ["sg-9fa8bffd", "sg-92c702f7", "sg-37f01152"],
+    "userData": null,
+    "instanceType": "m1.medium",
+    "kernelId": "",
+    "ramdiskId": "",
+    "blockDeviceMappings": null,
+    "instanceMonitoringIsEnabled": false,
+    "instancePriceType": "ON_DEMAND",
+    "iamInstanceProfile": "data-store-api",
+    "ebsOptimized": false,
+    "associatePublicIpAddress": null
+  },
+  "asgOptions": {
+    "autoScalingGroupName": null,
+    "launchConfigurationName": null,
+    "minSize": 4,
+    "maxSize": 4,
+    "desiredCapacity": 4,
+    "defaultCooldown": 10,
+    "availabilityZones": ["eu-west-1a", "eu-west-1c"],
+    "loadBalancerNames": ["datastoreapi-datastore-frontend", "datastoreapi-datastore"],
+    "healthCheckType": "ELB",
+    "healthCheckGracePeriod": 600,
+    "placementGroup": null,
+    "subnetPurpose": "internal",
+    "terminationPolicies": ["Default"],
+    "tags": [],
+    "suspendedProcesses": []
+  },
+  "deploymentOptions": {
+    "clusterName": "datastoreapi-datastore",
+    "notificationDestination": "m2h@springworks.se",
+    "steps": [
+      {
+        "type": "CreateAsg"
+      },
+      {
+        "type": "Resize",
+        "targetAsg": "Next",
+        "capacity": 4,
+        "startUpTimeoutMinutes": 40
+      },
+      {
+        "type": "DisableAsg",
+        "targetAsg": "Previous"
+      },
+      {
+        "type": "DeleteAsg",
+        "targetAsg": "Previous"
+      }
+    ]
+  },
+  "environment": {
+    "nextGroupName": "datastoreapi-datastore-v104",
+    "terminationPolicies": ["ClosestToNextInstanceHour", "Default", "NewestInstance", "OldestInstance", "OldestLaunchConfiguration"],
+    "purposeToVpcId": {
+      "external": "vpc-43175628",
+      "internal": "vpc-43175628"
+    },
+    "subnetPurposes": ["external", "internal"],
+    "availabilityZonesAndPurpose": [
+      {
+        "zone": "eu-west-1a",
+        "purpose": ""
+      },
+      {
+        "zone": "eu-west-1b",
+        "purpose": ""
+      },
+      {
+        "zone": "eu-west-1c",
+        "purpose": ""
+      },
+      {
+        "zone": "eu-west-1a",
+        "purpose": "external"
+      },
+      {
+        "zone": "eu-west-1b",
+        "purpose": "external"
+      },
+      {
+        "zone": "eu-west-1c",
+        "purpose": "external"
+      },
+      {
+        "zone": "eu-west-1a",
+        "purpose": "internal"
+      },
+      {
+        "zone": "eu-west-1b",
+        "purpose": "internal"
+      },
+      {
+        "zone": "eu-west-1c",
+        "purpose": "internal"
+      }
+    ],
+    "loadBalancers": [
+      {
+        "id": "datastoreapi-datastore",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "datastoreapi-datastore-frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "dcpeventapi-dcpevent",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "dcpeventapi-dcpevent-frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "geoapi-geo",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "geoapi-geo-frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "handoverapi-handover-frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "opsapi-ops",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "opsapi-ops-frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "vehicleinfoapi--frontend",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "vehicleinfoapi-vehicles",
+        "vpcId": "vpc-43175628"
+      }
+    ],
+    "healthCheckTypes": [
+      {
+        "id": "EC2",
+        "description": "Replace terminated instances"
+      },
+      {
+        "id": "ELB",
+        "description": "Replace instances that fail ELB health check"
+      }
+    ],
+    "instanceTypes": [
+      {
+        "id": "m3.medium",
+        "price": "$55.44/mo"
+      },
+      {
+        "id": "c3.large",
+        "price": "$86.40/mo"
+      },
+      {
+        "id": "m3.large",
+        "price": "$110.88/mo"
+      },
+      {
+        "id": "r3.large",
+        "price": "$140.40/mo"
+      },
+      {
+        "id": "c3.xlarge",
+        "price": "$172.08/mo"
+      },
+      {
+        "id": "m3.xlarge",
+        "price": "$221.76/mo"
+      },
+      {
+        "id": "r3.xlarge",
+        "price": "$280.80/mo"
+      },
+      {
+        "id": "c3.2xlarge",
+        "price": "$344.16/mo"
+      },
+      {
+        "id": "m3.2xlarge",
+        "price": "$443.52/mo"
+      },
+      {
+        "id": "r3.2xlarge",
+        "price": "$561.60/mo"
+      },
+      {
+        "id": "i2.xlarge",
+        "price": "$675.36/mo"
+      },
+      {
+        "id": "c3.4xlarge",
+        "price": "$688.32/mo"
+      },
+      {
+        "id": "r3.4xlarge",
+        "price": "$1,123.20/mo"
+      },
+      {
+        "id": "i2.2xlarge",
+        "price": "$1,350.72/mo"
+      },
+      {
+        "id": "c3.8xlarge",
+        "price": "$1,376.64/mo"
+      },
+      {
+        "id": "r3.8xlarge",
+        "price": "$2,246.40/mo"
+      },
+      {
+        "id": "i2.4xlarge",
+        "price": "$2,700.72/mo"
+      },
+      {
+        "id": "hs1.8xlarge",
+        "price": "$3,528.00/mo"
+      },
+      {
+        "id": "i2.8xlarge",
+        "price": "$5,401.44/mo"
+      },
+      {
+        "id": "c1.medium",
+        "price": ""
+      },
+      {
+        "id": "c1.xlarge",
+        "price": ""
+      },
+      {
+        "id": "cc1.4xlarge",
+        "price": ""
+      },
+      {
+        "id": "cc2.8xlarge",
+        "price": ""
+      },
+      {
+        "id": "cg1.4xlarge",
+        "price": ""
+      },
+      {
+        "id": "cr1.8xlarge",
+        "price": ""
+      },
+      {
+        "id": "g2.2xlarge",
+        "price": ""
+      },
+      {
+        "id": "hi1.4xlarge",
+        "price": ""
+      },
+      {
+        "id": "m1.large",
+        "price": ""
+      },
+      {
+        "id": "m1.medium",
+        "price": ""
+      },
+      {
+        "id": "m1.small",
+        "price": ""
+      },
+      {
+        "id": "m1.xlarge",
+        "price": ""
+      },
+      {
+        "id": "m2.2xlarge",
+        "price": ""
+      },
+      {
+        "id": "m2.4xlarge",
+        "price": ""
+      },
+      {
+        "id": "m2.xlarge",
+        "price": ""
+      },
+      {
+        "id": "t1.micro",
+        "price": ""
+      }
+    ],
+    "securityGroups": [
+      {
+        "id": "sg-ae8b7ec1",
+        "name": "asgard",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-354aaa50",
+        "name": "autocom-ap",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-905be6f5",
+        "name": "AWS-OpsWorks-AWS-Flow-Ruby-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-885be6ed",
+        "name": "AWS-OpsWorks-Blank-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-975be6f2",
+        "name": "AWS-OpsWorks-Custom-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8f5be6ea",
+        "name": "AWS-OpsWorks-DB-Master-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-955be6f0",
+        "name": "AWS-OpsWorks-Default-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-915be6f4",
+        "name": "AWS-OpsWorks-Java-App-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-895be6ec",
+        "name": "AWS-OpsWorks-LB-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8b5be6ee",
+        "name": "AWS-OpsWorks-Memcached-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8a5be6ef",
+        "name": "AWS-OpsWorks-Monitoring-Master-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-965be6f3",
+        "name": "AWS-OpsWorks-nodejs-App-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8c5be6e9",
+        "name": "AWS-OpsWorks-PHP-App-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8d5be6e8",
+        "name": "AWS-OpsWorks-Rails-App-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8e5be6eb",
+        "name": "AWS-OpsWorks-Web-Server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-7f757c1d",
+        "name": "bastion",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-a737d6c2",
+        "name": "broker-external-ap",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-0b262e69",
+        "name": "ci",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-04ef0e61",
+        "name": "datastoreapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-37f01152",
+        "name": "datastoreapi-instances",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-36196f53",
+        "name": "dcpeventapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-08196f6d",
+        "name": "dcpeventapi-instances",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-f0b2a492",
+        "name": "demo-nv-app",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-858c27e0",
+        "name": "geoanalyzer",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-e3e62f86",
+        "name": "geoapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-c6f930a3",
+        "name": "geoapi-instances",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-aa1db5cf",
+        "name": "geoapi-public",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-fe856d91",
+        "name": "github-access",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-114da774",
+        "name": "graphite",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-aaca6ccf",
+        "name": "handoverapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-87ca6ce2",
+        "name": "handoverapi-instances",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-23d46046",
+        "name": "icmp-access",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-52d0da30",
+        "name": "insecure-test-group",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-4539cb20",
+        "name": "internet-access",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-9fa8bffd",
+        "name": "logstash-agent",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-63564001",
+        "name": "logstash-server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-1fc22a70",
+        "name": "m2h-dns",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-ef876f80",
+        "name": "m2h-stage",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8a856de5",
+        "name": "m2h-tem",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-164fa679",
+        "name": "m2h-tools",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-4ae00825",
+        "name": "m2h-webserver",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8b4ab7ee",
+        "name": "mdi-deployment",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-883dceed",
+        "name": "mdi-proxy",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-52d65837",
+        "name": "messenger",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-f403d991",
+        "name": "mqtt-client",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-77584015",
+        "name": "mqtt-data-capture",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-540c0436",
+        "name": "mqtt-proxy",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-3636c453",
+        "name": "mqttbroker",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-0893716d",
+        "name": "mqttcapture",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-9931c3fc",
+        "name": "mqttproxy",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-d345acbc",
+        "name": "NATSG",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-3a0ef05f",
+        "name": "opsapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-3a0ff15f",
+        "name": "opsapi-instances",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-ba1810d8",
+        "name": "Opscode",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-e59f2b80",
+        "name": "pingdom-whitelist-1",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-ef9f2b8a",
+        "name": "pingdom-whitelist-2",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-c9325aac",
+        "name": "recurring-event-messenger",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-92c702f7",
+        "name": "splunk-client",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8bc702ee",
+        "name": "splunk-server",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-67515905",
+        "name": "ssh-access",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-f6524594",
+        "name": "tem-dns",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-fcd6dc9e",
+        "name": "tem-gateway",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-87c76fe2",
+        "name": "Temp geo",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-8836c4ed",
+        "name": "temproxy",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-3d232b5f",
+        "name": "tools-mysql",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-03bb0166",
+        "name": "vehicleinfoapi",
+        "vpcId": "vpc-43175628"
+      },
+      {
+        "id": "sg-558f0a30",
+        "name": "vehicleinfoapi-instances",
+        "vpcId": "vpc-43175628"
+      }
+    ],
+    "images": [
+      {
+        "id": "ami-1b59ab6c",
+        "imageLocation": "403799762630/CI/TeamCity"
+      },
+      {
+        "id": "ami-7f9c6108",
+        "imageLocation": "403799762630/data-store-api_2014-03-04-1716"
+      },
+      {
+        "id": "ami-7ba8500c",
+        "imageLocation": "403799762630/data-store-api_2014-04-02-1409"
+      },
+      {
+        "id": "ami-1360a564",
+        "imageLocation": "403799762630/data-store-api_2014-04-23-1510"
+      },
+      {
+        "id": "ami-97d81ae0",
+        "imageLocation": "403799762630/data-store-api_2014-05-23-1431"
+      },
+      {
+        "id": "ami-2f9b5258",
+        "imageLocation": "403799762630/data-store-api_2014-06-13-1455"
+      },
+      {
+        "id": "ami-31964346",
+        "imageLocation": "403799762630/data-store-api_2014-07-02-1146"
+      },
+      {
+        "id": "ami-5e39e529",
+        "imageLocation": "403799762630/data-store-api_2014-08-14-1127"
+      },
+      {
+        "id": "ami-f71e8880",
+        "imageLocation": "403799762630/dcp-event-api_2015-02-26-1926"
+      },
+      {
+        "id": "ami-a05b83d7",
+        "imageLocation": "403799762630/dns-secondary"
+      },
+      {
+        "id": "ami-3881264f",
+        "imageLocation": "403799762630/geo-analyzer_2014-09-18-2315"
+      },
+      {
+        "id": "ami-a31bd0d4",
+        "imageLocation": "403799762630/geo-api_2014-06-25-1226"
+      },
+      {
+        "id": "ami-915c97e6",
+        "imageLocation": "403799762630/geo-api_2014-06-26-1844"
+      },
+      {
+        "id": "ami-23964354",
+        "imageLocation": "403799762630/geo-api_2014-07-02-1148"
+      },
+      {
+        "id": "ami-4239e535",
+        "imageLocation": "403799762630/geo-api_2014-08-14-1128"
+      },
+      {
+        "id": "ami-82a27bf5",
+        "imageLocation": "403799762630/handover-api_2014-08-25-1716"
+      },
+      {
+        "id": "ami-6eb21119",
+        "imageLocation": "403799762630/mdi-deploy_2014-10-03-1017"
+      },
+      {
+        "id": "ami-80bb18f7",
+        "imageLocation": "403799762630/mdi-deploy_2014-10-03-1312"
+      },
+      {
+        "id": "ami-097dbc7e",
+        "imageLocation": "403799762630/mdi-deployment-server_2014-05-13-1724"
+      },
+      {
+        "id": "ami-3bd81a4c",
+        "imageLocation": "403799762630/mdi-deployment-server_2014-05-23-1416"
+      },
+      {
+        "id": "ami-a59540d2",
+        "imageLocation": "403799762630/mdi-deployment-server_2014-07-02-1035"
+      },
+      {
+        "id": "ami-0e03df79",
+        "imageLocation": "403799762630/mdi-deployment-server_2014-08-14-0848"
+      },
+      {
+        "id": "ami-1a3fe36d",
+        "imageLocation": "403799762630/mdi-deployment-server_2014-08-14-1042"
+      },
+      {
+        "id": "ami-e5d11592",
+        "imageLocation": "403799762630/mdi-proxy_2014-04-25-1055"
+      },
+      {
+        "id": "ami-f7db1d80",
+        "imageLocation": "403799762630/mdi-proxy_2014-05-06-1006"
+      },
+      {
+        "id": "ami-23d91b54",
+        "imageLocation": "403799762630/mdi-proxy_2014-05-23-1444"
+      },
+      {
+        "id": "ami-d0a416a7",
+        "imageLocation": "403799762630/messenger-template_2014-12-01-0813"
+      },
+      {
+        "id": "ami-4958a13e",
+        "imageLocation": "403799762630/mqtt-broker_2014-04-01-1508"
+      },
+      {
+        "id": "ami-5b67a22c",
+        "imageLocation": "403799762630/mqtt-broker_2014-04-23-1325"
+      },
+      {
+        "id": "ami-518b4f26",
+        "imageLocation": "403799762630/mqtt-broker_2014-04-24-1010"
+      },
+      {
+        "id": "ami-2bd81a5c",
+        "imageLocation": "403799762630/mqtt-broker_2014-05-23-1417"
+      },
+      {
+        "id": "ami-19ac646e",
+        "imageLocation": "403799762630/mqtt-broker_2014-06-18-2017"
+      },
+      {
+        "id": "ami-6b9e4b1c",
+        "imageLocation": "403799762630/mqtt-broker_2014-07-02-1520"
+      },
+      {
+        "id": "ami-1e3fe369",
+        "imageLocation": "403799762630/mqtt-broker_2014-08-14-1042"
+      },
+      {
+        "id": "ami-2aea4f5d",
+        "imageLocation": "403799762630/mqtt-broker_2014-09-09-1623"
+      },
+      {
+        "id": "ami-6cb4171b",
+        "imageLocation": "403799762630/mqtt-broker_2014-10-03-1234"
+      },
+      {
+        "id": "ami-1d4ab86a",
+        "imageLocation": "403799762630/mqtt-capture_2014-03-03-2050"
+      },
+      {
+        "id": "ami-1d9d606a",
+        "imageLocation": "403799762630/mqtt-capture_2014-03-04-1700"
+      },
+      {
+        "id": "ami-7fa85008",
+        "imageLocation": "403799762630/mqtt-capture_2014-04-02-1408"
+      },
+      {
+        "id": "ami-235a9f54",
+        "imageLocation": "403799762630/mqtt-capture_2014-04-23-1158"
+      },
+      {
+        "id": "ami-9dd81aea",
+        "imageLocation": "403799762630/mqtt-capture_2014-05-23-1432"
+      },
+      {
+        "id": "ami-835997f4",
+        "imageLocation": "403799762630/mqtt-capture_2014-06-12-1630"
+      },
+      {
+        "id": "ami-17964360",
+        "imageLocation": "403799762630/mqtt-capture_2014-07-02-1148"
+      },
+      {
+        "id": "ami-183fe36f",
+        "imageLocation": "403799762630/mqtt-capture_2014-08-14-1042"
+      },
+      {
+        "id": "ami-bda65bca",
+        "imageLocation": "403799762630/mqtt-proxy_2014-03-04-1417"
+      },
+      {
+        "id": "ami-a764a1d0",
+        "imageLocation": "403799762630/mqtt-proxy_2014-04-23-1305"
+      },
+      {
+        "id": "ami-6fd81a18",
+        "imageLocation": "403799762630/mqtt-proxy_2014-05-23-1410"
+      },
+      {
+        "id": "ami-11d91b66",
+        "imageLocation": "403799762630/ops-api_2014-05-23-1446"
+      },
+      {
+        "id": "ami-b7955cc0",
+        "imageLocation": "403799762630/ops-api_2014-06-13-1954"
+      },
+      {
+        "id": "ami-eb8d479c",
+        "imageLocation": "403799762630/ops-api_2014-06-27-1437"
+      },
+      {
+        "id": "ami-eb91449c",
+        "imageLocation": "403799762630/ops-api_2014-07-02-1217"
+      },
+      {
+        "id": "ami-4c39e53b",
+        "imageLocation": "403799762630/ops-api_2014-08-14-1128"
+      },
+      {
+        "id": "ami-e05c8497",
+        "imageLocation": "403799762630/primary-dns-20140831-1331"
+      },
+      {
+        "id": "ami-8e2bf2f9",
+        "imageLocation": "403799762630/tc-agent-template_2014-08-27-0928"
+      },
+      {
+        "id": "ami-9eae77e9",
+        "imageLocation": "403799762630/tc-agent_2014-08-25-1520"
+      },
+      {
+        "id": "ami-123fe365",
+        "imageLocation": "403799762630/teamcity-agent_2014-08-14-1042"
+      },
+      {
+        "id": "ami-8aec49fd",
+        "imageLocation": "403799762630/teamcity-agent_2014-09-09-1402"
+      },
+      {
+        "id": "ami-56b71221",
+        "imageLocation": "403799762630/teamcity-agent_2014-09-10-1550"
+      },
+      {
+        "id": "ami-92b711e5",
+        "imageLocation": "403799762630/teamcity-agent_2014-09-22-2031"
+      },
+      {
+        "id": "ami-06279871",
+        "imageLocation": "403799762630/teamcity-agent_2014-12-12-1157"
+      },
+      {
+        "id": "ami-d0e653a7",
+        "imageLocation": "403799762630/vehicle-info-api_2014-11-06-1103"
+      },
+      {
+        "id": "ami-662b3e12",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.0.0 on Windows 2008"
+      },
+      {
+        "id": "ami-642b3e10",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.0.0 on Windows 2012"
+      },
+      {
+        "id": "ami-f56a7881",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.1.0 on Windows 2008"
+      },
+      {
+        "id": "ami-396a784d",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.1.0 on Windows 2012"
+      },
+      {
+        "id": "ami-32699945",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.2.3 on Windows 2008"
+      },
+      {
+        "id": "ami-46699931",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.2.3 on Windows 2012"
+      },
+      {
+        "id": "ami-ada266da",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.2.4 on Windows 2008"
+      },
+      {
+        "id": "ami-cda266ba",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v1.0.2.4 on Windows 2012"
+      },
+      {
+        "id": "ami-4f974738",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.0.1 on Windows 2008"
+      },
+      {
+        "id": "ami-2b96465c",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.0.1 on Windows 2012"
+      },
+      {
+        "id": "ami-0b98487c",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.0.1 on Windows 2012R2"
+      },
+      {
+        "id": "ami-7b97470c",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.0.1 on Windows 2012R2core"
+      },
+      {
+        "id": "ami-4c56ff3b",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.1 on Windows 2008"
+      },
+      {
+        "id": "ami-2c55fc5b",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.1 on Windows 2012"
+      },
+      {
+        "id": "ami-e055fc97",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.1 on Windows 2012R2"
+      },
+      {
+        "id": "ami-b655fcc1",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.1 on Windows 2012R2core"
+      },
+      {
+        "id": "ami-d469dfa3",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.6 on Windows 2008"
+      },
+      {
+        "id": "ami-466bdd31",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.6 on Windows 2012"
+      },
+      {
+        "id": "ami-026bdd75",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.6 on Windows 2012R2"
+      },
+      {
+        "id": "ami-b26adcc5",
+        "imageLocation": "amazon/.NET Beanstalk Cfn Container v2.0.2.6 on Windows 2012R2core"
+      },
+      {
+        "id": "ami-811228f5",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.0.3"
+      },
+      {
+        "id": "ami-ab6662df",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.0.4"
+      },
+      {
+        "id": "ami-c52026b1",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.0.9"
+      },
+      {
+        "id": "ami-75d2d201",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.1.1"
+      },
+      {
+        "id": "ami-83f9faf7",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.1.2 on Windows 2012"
+      },
+      {
+        "id": "ami-08666e7c",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.1.4 on Windows 2012"
+      },
+      {
+        "id": "ami-fc909888",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.1.5 on Windows 2008"
+      },
+      {
+        "id": "ami-fc878f88",
+        "imageLocation": "amazon/.NET Beanstalk HostManager v1.0.1.5 on Windows 2012"
+      },
+      {
+        "id": "ami-2d1f0859",
+        "imageLocation": "amazon/amazon/PHPBeanstalk32-2013.03.27T17.04.41.0000"
+      },
+      {
+        "id": "ami-971f08e3",
+        "imageLocation": "amazon/amazon/PHPBeanstalk64-2013.03.27T17.04.41.0000"
+      },
+      {
+        "id": "ami-095b6c7d",
+        "imageLocation": "amazon/ami-vpc-nat-1.0.0-beta.i386-ebs"
+      },
+      {
+        "id": "ami-0b5b6c7f",
+        "imageLocation": "amazon/ami-vpc-nat-1.0.0-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-1de2d969",
+        "imageLocation": "amazon/ami-vpc-nat-1.1.0-beta.i386-ebs"
+      },
+      {
+        "id": "ami-e5e2d991",
+        "imageLocation": "amazon/ami-vpc-nat-1.1.0-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-5692b822",
+        "imageLocation": "amazon/amzn-ami-0.9.7-beta.i386-ebs"
+      },
+      {
+        "id": "ami-5092b824",
+        "imageLocation": "amazon/amzn-ami-0.9.7-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-827540f6",
+        "imageLocation": "amazon/amzn-ami-0.9.8-beta.i386-ebs"
+      },
+      {
+        "id": "ami-807540f4",
+        "imageLocation": "amazon/amzn-ami-0.9.8-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-6a31041e",
+        "imageLocation": "amazon/amzn-ami-0.9.9-beta.i386-ebs"
+      },
+      {
+        "id": "ami-6e31041a",
+        "imageLocation": "amazon/amzn-ami-0.9.9-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-7fd4e10b",
+        "imageLocation": "amazon/amzn-ami-2010.11.1-beta.i386-ebs"
+      },
+      {
+        "id": "ami-75d4e101",
+        "imageLocation": "amazon/amzn-ami-2010.11.1-beta.x86_64-ebs"
+      },
+      {
+        "id": "ami-47cefa33",
+        "imageLocation": "amazon/amzn-ami-2011.02.1.i386-ebs"
+      },
+      {
+        "id": "ami-45cefa31",
+        "imageLocation": "amazon/amzn-ami-2011.02.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-24506250",
+        "imageLocation": "amazon/amzn-ami-2011.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-20506254",
+        "imageLocation": "amazon/amzn-ami-2011.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-973b06e3",
+        "imageLocation": "amazon/amzn-ami-2011.09.2.i386-ebs"
+      },
+      {
+        "id": "ami-953b06e1",
+        "imageLocation": "amazon/amzn-ami-2011.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-39f8fe4d",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2012.03.3.x86_64-ebs"
+      },
+      {
+        "id": "ami-1b02026f",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2012.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-3e5e564a",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2012.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-a09298d4",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2013.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-45c0d631",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2013.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-2c9f785b",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2013.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-ad14f6da",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2013.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-7056b807",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2013.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-b521dfc2",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-4518e332",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-972fe1e0",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-728e2905",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-607bd917",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-21ce4256",
+        "imageLocation": "amazon/amzn-ami-gpu-hvm-2014.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-81b7b2f5",
+        "imageLocation": "amazon/amzn-ami-hvm-2012.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-67555113",
+        "imageLocation": "amazon/amzn-ami-hvm-2012.03.3.x86_64-ebs"
+      },
+      {
+        "id": "ami-d97474ad",
+        "imageLocation": "amazon/amzn-ami-hvm-2012.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-2a5e565e",
+        "imageLocation": "amazon/amzn-ami-hvm-2012.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-a29298d6",
+        "imageLocation": "amazon/amzn-ami-hvm-2013.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-d1c0d6a5",
+        "imageLocation": "amazon/amzn-ami-hvm-2013.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-209f7857",
+        "imageLocation": "amazon/amzn-ami-hvm-2013.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-2b09eb5c",
+        "imageLocation": "amazon/amzn-ami-hvm-2013.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-7c56b80b",
+        "imageLocation": "amazon/amzn-ami-hvm-2013.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-bb21dfcc",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-4b18e33c",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-892fe1fe",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-dd925baa",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.03.2.x86_64-gp2"
+      },
+      {
+        "id": "ami-748e2903",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-768e2901",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.0.x86_64-gp2"
+      },
+      {
+        "id": "ami-6e7bd919",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-6a7bd91d",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.1.x86_64-gp2"
+      },
+      {
+        "id": "ami-9d23aeea",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-8723aef0",
+        "imageLocation": "amazon/amzn-ami-hvm-2014.09.2.x86_64-gp2"
+      },
+      {
+        "id": "ami-a92fe1de",
+        "imageLocation": "amazon/amzn-ami-minimal-hvm-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-908f28e7",
+        "imageLocation": "amazon/amzn-ami-minimal-hvm-2014.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-987ad8ef",
+        "imageLocation": "amazon/amzn-ami-minimal-hvm-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-c322afb4",
+        "imageLocation": "amazon/amzn-ami-minimal-hvm-2014.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-ed747499",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2012.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-d77474a3",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2012.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-125e5666",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2012.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-025e5676",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2012.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-929298e6",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.03.0.i386-ebs"
+      },
+      {
+        "id": "ami-989298ec",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-75c1d701",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.03.1.i386-ebs"
+      },
+      {
+        "id": "ami-0fc0d67b",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-3c9f784b",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-269f7851",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-41ec0e36",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-37ec0e40",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-bc59b7cb",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.2.i386-ebs"
+      },
+      {
+        "id": "ami-9659b7e1",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2013.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-fd21df8a",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.0.i386-ebs"
+      },
+      {
+        "id": "ami-b721dfc0",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-7518e302",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.1.i386-ebs"
+      },
+      {
+        "id": "ami-4918e33e",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-952fe1e2",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.2.i386-ebs"
+      },
+      {
+        "id": "ami-812fe1f6",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-f68f2881",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-fe8f2889",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-1674d661",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-be75d7c9",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-6fce4218",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.2.i386-ebs"
+      },
+      {
+        "id": "ami-8522aff2",
+        "imageLocation": "amazon/amzn-ami-minimal-pv-2014.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-fd231b89",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.1.i386-ebs"
+      },
+      {
+        "id": "ami-f9231b8d",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-89b7b2fd",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.2.i386-ebs"
+      },
+      {
+        "id": "ami-8fb7b2fb",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-61555115",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.3.i386-ebs"
+      },
+      {
+        "id": "ami-6d555119",
+        "imageLocation": "amazon/amzn-ami-pv-2012.03.3.x86_64-ebs"
+      },
+      {
+        "id": "ami-937474e7",
+        "imageLocation": "amazon/amzn-ami-pv-2012.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-c37474b7",
+        "imageLocation": "amazon/amzn-ami-pv-2012.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-5c5f5728",
+        "imageLocation": "amazon/amzn-ami-pv-2012.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-3c5f5748",
+        "imageLocation": "amazon/amzn-ami-pv-2012.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-6893991c",
+        "imageLocation": "amazon/amzn-ami-pv-2013.03.0.i386-ebs"
+      },
+      {
+        "id": "ami-44939930",
+        "imageLocation": "amazon/amzn-ami-pv-2013.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-ddc1d7a9",
+        "imageLocation": "amazon/amzn-ami-pv-2013.03.1.i386-ebs"
+      },
+      {
+        "id": "ami-c7c0d6b3",
+        "imageLocation": "amazon/amzn-ami-pv-2013.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-109f7867",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-149f7863",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-efec0e98",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-c7ec0eb0",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-6a56b81d",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.2.i386-ebs"
+      },
+      {
+        "id": "ami-5256b825",
+        "imageLocation": "amazon/amzn-ami-pv-2013.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-ab21dfdc",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.0.i386-ebs"
+      },
+      {
+        "id": "ami-a921dfde",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-2d18e35a",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.1.i386-ebs"
+      },
+      {
+        "id": "ami-2918e35e",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-652ce212",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.2.i386-ebs"
+      },
+      {
+        "id": "ami-672ce210",
+        "imageLocation": "amazon/amzn-ami-pv-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-c08f28b7",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.0.i386-ebs"
+      },
+      {
+        "id": "ami-aa8f28dd",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-be7ad8c9",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.1.i386-ebs"
+      },
+      {
+        "id": "ami-9c7ad8eb",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-f1ce4286",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.2.i386-ebs"
+      },
+      {
+        "id": "ami-7b3db00c",
+        "imageLocation": "amazon/amzn-ami-pv-2014.09.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-3760b040",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-hvm-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-5b60b02c",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-hvm-2014.03.2.x86_64-gp2"
+      },
+      {
+        "id": "ami-14913f63",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-hvm-2014.09.1.x86_64-gp2"
+      },
+      {
+        "id": "ami-ed352799",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-pv-2013.03.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-f3e30084",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-pv-2013.09.0.x86_64-ebs"
+      },
+      {
+        "id": "ami-6d60b01a",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-pv-2014.03.2.x86_64-ebs"
+      },
+      {
+        "id": "ami-30913f47",
+        "imageLocation": "amazon/amzn-ami-vpc-nat-pv-2014.09.1.x86_64-ebs"
+      },
+      {
+        "id": "ami-066fb371",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-gpu-201408151947"
+      },
+      {
+        "id": "ami-0a6fb37d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-hvm-201408151946"
+      },
+      {
+        "id": "ami-9a6eb2ed",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-pv-201408151928"
+      },
+      {
+        "id": "ami-7011b707",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.2-e10f5b547e18-docker-1.0.0-gpu-201409250202"
+      },
+      {
+        "id": "ami-7611b701",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.2-e10f5b547e18-docker-1.0.0-hvm-201409250202"
+      },
+      {
+        "id": "ami-8a10b6fd",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amazon-2014.03.2-e10f5b547e18-docker-1.0.0-pv-201409250202"
+      },
+      {
+        "id": "ami-71c44806",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.i386-base-pv-201501280300"
+      },
+      {
+        "id": "ami-0dce427a",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-gpu-201501280214"
+      },
+      {
+        "id": "ami-59d9552e",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-gpu-201501280546"
+      },
+      {
+        "id": "ami-1dce426a",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-hvm-201501280214"
+      },
+      {
+        "id": "ami-5dd9552a",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-hvm-201501280546"
+      },
+      {
+        "id": "ami-15ce4262",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-pv-201501280214"
+      },
+      {
+        "id": "ami-5fd95528",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.2.x86_64-base-pv-201501280546"
+      },
+      {
+        "id": "ami-cc238fbb",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.i386-eb-pv-201410160017"
+      },
+      {
+        "id": "ami-e2349895",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.i386-eb-pv-201410160134"
+      },
+      {
+        "id": "ami-ce238fb9",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.x86_64-eb-pv-201410160017"
+      },
+      {
+        "id": "ami-fa34988d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.03.x86_64-eb-pv-201410160134"
+      },
+      {
+        "id": "ami-aaa000dd",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-gpu-201409291846"
+      },
+      {
+        "id": "ami-52248825",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-gpu-201410152244"
+      },
+      {
+        "id": "ami-eedf7f99",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-hvm-201409291825"
+      },
+      {
+        "id": "ami-62248815",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-hvm-201410152244"
+      },
+      {
+        "id": "ami-e0df7f97",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-pv-201409291825"
+      },
+      {
+        "id": "ami-6a24881d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-docker120-pv-201410152244"
+      },
+      {
+        "id": "ami-aca000db",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-gpu-201409291846"
+      },
+      {
+        "id": "ami-ee2a8699",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-gpu-201410152217"
+      },
+      {
+        "id": "ami-eadf7f9d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-hvm-201409291824"
+      },
+      {
+        "id": "ami-f82a868f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-hvm-201410152217"
+      },
+      {
+        "id": "ami-d2df7fa5",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-pv-201409291824"
+      },
+      {
+        "id": "ami-e22a8695",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-nodejs-pv-201410152217"
+      },
+      {
+        "id": "ami-14a00063",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-gpu-201409291832"
+      },
+      {
+        "id": "ami-ec24889b",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-gpu-201410152253"
+      },
+      {
+        "id": "ami-2aa0005d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-hvm-201409291832"
+      },
+      {
+        "id": "ami-e6248891",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-hvm-201410152253"
+      },
+      {
+        "id": "ami-16a00061",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-pv-201409291832"
+      },
+      {
+        "id": "ami-e4248893",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php54-pv-201410152253"
+      },
+      {
+        "id": "ami-dcdf7fab",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-gpu-201409291824"
+      },
+      {
+        "id": "ami-42248835",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-gpu-201410152244"
+      },
+      {
+        "id": "ami-d6df7fa1",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-hvm-201409291824"
+      },
+      {
+        "id": "ami-5824882f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-hvm-201410152244"
+      },
+      {
+        "id": "ami-e8df7f9f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-pv-201409291824"
+      },
+      {
+        "id": "ami-5c24882b",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-php55-pv-201410152244"
+      },
+      {
+        "id": "ami-90df7fe7",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-gpu-201409291829"
+      },
+      {
+        "id": "ami-be2a86c9",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-gpu-201410152224"
+      },
+      {
+        "id": "ami-94df7fe3",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-hvm-201409291829"
+      },
+      {
+        "id": "ami-b42a86c3",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-hvm-201410152224"
+      },
+      {
+        "id": "ami-92df7fe5",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-pv-201409291829"
+      },
+      {
+        "id": "ami-b22a86c5",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java6-pv-201410152224"
+      },
+      {
+        "id": "ami-e6df7f91",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-gpu-201409291824"
+      },
+      {
+        "id": "ami-fe2a8689",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-gpu-201410152217"
+      },
+      {
+        "id": "ami-e4df7f93",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-hvm-201409291824"
+      },
+      {
+        "id": "ami-082a867f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-hvm-201410152217"
+      },
+      {
+        "id": "ami-fadf7f8d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-pv-201409291824"
+      },
+      {
+        "id": "ami-f22a8685",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.0.x86_64-tomcat7java7-pv-201410152217"
+      },
+      {
+        "id": "ami-95e567e2",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-nodejs-pv-201501220607"
+      },
+      {
+        "id": "ami-c3ea68b4",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-php54-pv-201501220631"
+      },
+      {
+        "id": "ami-99e567ee",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-php55-pv-201501220609"
+      },
+      {
+        "id": "ami-e16aeb96",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-python26-pv-201501141936"
+      },
+      {
+        "id": "ami-2b6aeb5c",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-python27-pv-201501141924"
+      },
+      {
+        "id": "ami-b1f073c6",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-ruby-pv-201501191951"
+      },
+      {
+        "id": "ami-3fa92848",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-tomcat7java6-pv-201501140107"
+      },
+      {
+        "id": "ami-d5a627a2",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.i386-tomcat7java7-pv-201501140057"
+      },
+      {
+        "id": "ami-823181f5",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-gpu-201411260040"
+      },
+      {
+        "id": "ami-782b940f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-gpu-201412120908"
+      },
+      {
+        "id": "ami-e727aa90",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-gpu-201501272206"
+      },
+      {
+        "id": "ami-ae3181d9",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-hvm-201411260040"
+      },
+      {
+        "id": "ami-7a2b940d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-hvm-201412120908"
+      },
+      {
+        "id": "ami-ff27aa88",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-hvm-201501272206"
+      },
+      {
+        "id": "ami-aa3181dd",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-pv-201411260040"
+      },
+      {
+        "id": "ami-662b9411",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-pv-201412120908"
+      },
+      {
+        "id": "ami-fd27aa8a",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker-pv-201501272206"
+      },
+      {
+        "id": "ami-b616bdc1",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker120-gpu-201411022045"
+      },
+      {
+        "id": "ami-ee16bd99",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker120-hvm-201411022045"
+      },
+      {
+        "id": "ami-0a16bd7d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-docker120-pv-201411022045"
+      },
+      {
+        "id": "ami-3327aa44",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-nodejs-gpu-201501272159"
+      },
+      {
+        "id": "ami-4b27aa3c",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-nodejs-hvm-201501272159"
+      },
+      {
+        "id": "ami-4927aa3e",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-nodejs-pv-201501272159"
+      },
+      {
+        "id": "ami-2b26ab5c",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php54-gpu-201501272232"
+      },
+      {
+        "id": "ami-2326ab54",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php54-hvm-201501272232"
+      },
+      {
+        "id": "ami-2526ab52",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php54-pv-201501272232"
+      },
+      {
+        "id": "ami-a727aad0",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php55-gpu-201501272214"
+      },
+      {
+        "id": "ami-bf27aac8",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php55-hvm-201501272214"
+      },
+      {
+        "id": "ami-b327aac4",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-php55-pv-201501272214"
+      },
+      {
+        "id": "ami-2c0ba55b",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-gpu-201410222339"
+      },
+      {
+        "id": "ami-1926ab6e",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-gpu-201501272233"
+      },
+      {
+        "id": "ami-7a0ba50d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-hvm-201410222339"
+      },
+      {
+        "id": "ami-2f26ab58",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-hvm-201501272233"
+      },
+      {
+        "id": "ami-780ba50f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-pv-201410222339"
+      },
+      {
+        "id": "ami-2126ab56",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python26-pv-201501272233"
+      },
+      {
+        "id": "ami-a20aa4d5",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-gpu-201410222328"
+      },
+      {
+        "id": "ami-6326ab14",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-gpu-201501272224"
+      },
+      {
+        "id": "ami-a60aa4d1",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-hvm-201410222328"
+      },
+      {
+        "id": "ami-7526ab02",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-hvm-201501272224"
+      },
+      {
+        "id": "ami-bc0aa4cb",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-pv-201410222328"
+      },
+      {
+        "id": "ami-7d26ab0a",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-python27-pv-201501272224"
+      },
+      {
+        "id": "ami-b803abcf",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-gpu-201410292103"
+      },
+      {
+        "id": "ami-8f26abf8",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-gpu-201501272243"
+      },
+      {
+        "id": "ami-ba03abcd",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-hvm-201410292103"
+      },
+      {
+        "id": "ami-8526abf2",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-hvm-201501272243"
+      },
+      {
+        "id": "ami-b003abc7",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-pv-201410292103"
+      },
+      {
+        "id": "ami-8726abf0",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-ruby-pv-201501272243"
+      },
+      {
+        "id": "ami-ff23ae88",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java6-gpu-201501272310"
+      },
+      {
+        "id": "ami-0b23ae7c",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java6-hvm-201501272310"
+      },
+      {
+        "id": "ami-0923ae7e",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java6-pv-201501272310"
+      },
+      {
+        "id": "ami-7123ae06",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java7-gpu-201501272303"
+      },
+      {
+        "id": "ami-8520adf2",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java7-hvm-201501272303"
+      },
+      {
+        "id": "ami-8120adf6",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat7java7-pv-201501272303"
+      },
+      {
+        "id": "ami-d4ac06a3",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-gpu-201411032042"
+      },
+      {
+        "id": "ami-6f20ad18",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-gpu-201501272255"
+      },
+      {
+        "id": "ami-eaac069d",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-hvm-201411032042"
+      },
+      {
+        "id": "ami-4321ac34",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-hvm-201501272255"
+      },
+      {
+        "id": "ami-e8ac069f",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-pv-201411032042"
+      },
+      {
+        "id": "ami-4521ac32",
+        "imageLocation": "amazon/aws-elasticbeanstalk-amzn-2014.09.1.x86_64-tomcat8java8-pv-201501272255"
+      },
+      {
+        "id": "ami-a8a27edf",
+        "imageLocation": "amazon/beanstalkRubyPVV1"
+      },
+      {
+        "id": "ami-66a07c11",
+        "imageLocation": "amazon/beanstalkRubyV1"
+      },
+      {
+        "id": "ami-8bc1f5ff",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_1.0_75d4e101-64bit-20110223-2128"
+      },
+      {
+        "id": "ami-89c1f5fd",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_1.0_7fd4e10b-32bit-20110223-2128"
+      },
+      {
+        "id": "ami-27b08453",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_1.1_75d4e101-64bit-20110228-0402"
+      },
+      {
+        "id": "ami-25b08451",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_1.1_7fd4e10b-32bit-20110228-0359"
+      },
+      {
+        "id": "ami-aa3606de",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_2.0_75d4e101-64bit-20110722-1710"
+      },
+      {
+        "id": "ami-a63606d2",
+        "imageLocation": "amazon/CloudFormation-drupal_7.0_2.0_7fd4e10b-32bit-20110722-1708"
+      },
+      {
+        "id": "ami-37c2f643",
+        "imageLocation": "amazon/CloudFormation-gettingstarted_5.3.3_1.0_7fd4e10b-32bit-20110223-2340"
+      },
+      {
+        "id": "ami-e0360694",
+        "imageLocation": "amazon/CloudFormation-gettingstarted_5.3.3_2.0_75d4e101-64bit-20110722-1629"
+      },
+      {
+        "id": "ami-e6360692",
+        "imageLocation": "amazon/CloudFormation-gettingstarted_5.3.3_2.0_7fd4e10b-32bit-20110722-1629"
+      },
+      {
+        "id": "ami-998bb9ed",
+        "imageLocation": "amazon/CloudFormation-gettingstarted_5.3.3_3.0_20506254-64bit-20111018-2307"
+      },
+      {
+        "id": "ami-018bb975",
+        "imageLocation": "amazon/CloudFormation-gettingstarted_5.3.3_3.0_24506250-32bit-20111018-2133"
+      },
+      {
+        "id": "ami-7fc2f60b",
+        "imageLocation": "amazon/CloudFormation-gollum_1.1.1_1.0_75d4e101-64bit-20110223-2145"
+      },
+      {
+        "id": "ami-79c2f60d",
+        "imageLocation": "amazon/CloudFormation-gollum_1.1.1_1.0_7fd4e10b-32bit-20110223-2145"
+      },
+      {
+        "id": "ami-9a3606ee",
+        "imageLocation": "amazon/CloudFormation-gollum_1.1.1_2.0_75d4e101-64bit-20110722-1742"
+      },
+      {
+        "id": "ami-843606f0",
+        "imageLocation": "amazon/CloudFormation-gollum_1.1.1_2.0_7fd4e10b-32bit-20110722-1743"
+      },
+      {
+        "id": "ami-6fc2f61b",
+        "imageLocation": "amazon/CloudFormation-hwphp_5.3.3_1.0_75d4e101-64bit-20110223-2204"
+      },
+      {
+        "id": "ami-6bc2f61f",
+        "imageLocation": "amazon/CloudFormation-hwphp_5.3.3_1.0_7fd4e10b-32bit-20110223-2210"
+      },
+      {
+        "id": "ami-de3707aa",
+        "imageLocation": "amazon/CloudFormation-hwphp_5.3.3_2.0_75d4e101-64bit-20110722-2009"
+      },
+      {
+        "id": "ami-d83707ac",
+        "imageLocation": "amazon/CloudFormation-hwphp_5.3.3_2.0_7fd4e10b-32bit-20110722-2009"
+      },
+      {
+        "id": "ami-13c2f667",
+        "imageLocation": "amazon/CloudFormation-hwrails_2.3.2_1.0_75d4e101-64bit-20110224-0020"
+      },
+      {
+        "id": "ami-17c2f663",
+        "imageLocation": "amazon/CloudFormation-hwrails_2.3.2_1.0_7fd4e10b-32bit-20110224-0019"
+      },
+      {
+        "id": "ami-6813231c",
+        "imageLocation": "amazon/CloudFormation-hwrails_2.3.2_2.0_45cefa31-64bit-20110727-0435"
+      },
+      {
+        "id": "ami-54132320",
+        "imageLocation": "amazon/CloudFormation-hwrails_2.3.2_2.0_47cefa33-32bit-20110727-0436"
+      },
+      {
+        "id": "ami-fbc3f78f",
+        "imageLocation": "amazon/CloudFormation-insoshi_1.0.0_1.0_75d4e101-64bit-20110224-0714"
+      },
+      {
+        "id": "ami-e1c3f795",
+        "imageLocation": "amazon/CloudFormation-insoshi_1.0.0_1.0_7fd4e10b-32bit-20110224-0716"
+      },
+      {
+        "id": "ami-f817278c",
+        "imageLocation": "amazon/CloudFormation-insoshi_1.0.0_2.0_45cefa31-64bit-20110727-1654"
+      },
+      {
+        "id": "ami-821323f6",
+        "imageLocation": "amazon/CloudFormation-insoshi_1.0.0_2.0_47cefa33-32bit-20110727-0740"
+      },
+      {
+        "id": "ami-03c2f677",
+        "imageLocation": "amazon/CloudFormation-joomla_1.6.0_1.0_75d4e101-64bit-20110224-0039"
+      },
+      {
+        "id": "ami-0fc2f67b",
+        "imageLocation": "amazon/CloudFormation-joomla_1.6.0_1.0_7fd4e10b-32bit-20110224-0041"
+      },
+      {
+        "id": "ami-dc0030a8",
+        "imageLocation": "amazon/CloudFormation-joomla_1.6.0_2.0_45cefa31-64bit-20110728-1954"
+      },
+      {
+        "id": "ami-d20030a6",
+        "imageLocation": "amazon/CloudFormation-joomla_1.6.0_2.0_47cefa33-32bit-20110728-1954"
+      },
+      {
+        "id": "ami-efc2f69b",
+        "imageLocation": "amazon/CloudFormation-redmine_1.1.1_1.0_75d4e101-64bit-20110224-0146"
+      },
+      {
+        "id": "ami-e9c2f69d",
+        "imageLocation": "amazon/CloudFormation-redmine_1.1.1_1.0_7fd4e10b-32bit-20110224-0146"
+      },
+      {
+        "id": "ami-3838084c",
+        "imageLocation": "amazon/CloudFormation-redmine_1.1.1_2.0_75d4e101-64bit-20110722-2239"
+      },
+      {
+        "id": "ami-3a38084e",
+        "imageLocation": "amazon/CloudFormation-redmine_1.1.1_2.0_7fd4e10b-32bit-20110722-2240"
+      },
+      {
+        "id": "ami-dfc2f6ab",
+        "imageLocation": "amazon/CloudFormation-tracks_1.7.2_1.0_75d4e101-64bit-20110224-0211"
+      },
+      {
+        "id": "ami-d9c2f6ad",
+        "imageLocation": "amazon/CloudFormation-tracks_1.7.2_1.0_7fd4e10b-32bit-20110224-0211"
+      },
+      {
+        "id": "ami-801f2ff4",
+        "imageLocation": "amazon/CloudFormation-tracks_1.7.2_2.0_45cefa31-64bit-20110728-1724"
+      },
+      {
+        "id": "ami-dc1f2fa8",
+        "imageLocation": "amazon/CloudFormation-tracks_1.7.2_2.0_47cefa33-32bit-20110728-1625"
+      },
+      {
+        "id": "ami-a3c2f6d7",
+        "imageLocation": "amazon/CloudFormation-wordpress_3.0.4_1.0_75d4e101-64bit-20110224-0257"
+      },
+      {
+        "id": "ami-a1c2f6d5",
+        "imageLocation": "amazon/CloudFormation-wordpress_3.0.4_1.0_7fd4e10b-32bit-20110224-0256"
+      },
+      {
+        "id": "ami-be2818ca",
+        "imageLocation": "amazon/CloudFormation-wordpress_3.0.4_2.0_75d4e101-64bit-20110725-1732"
+      },
+      {
+        "id": "ami-bc2818c8",
+        "imageLocation": "amazon/CloudFormation-wordpress_3.0.4_2.0_7fd4e10b-32bit-20110725-1732"
+      },
+      {
+        "id": "ami-5dffc229",
+        "imageLocation": "amazon/CloudFormer 0.10"
+      },
+      {
+        "id": "ami-87cef2f3",
+        "imageLocation": "amazon/CloudFormer 0.11"
+      },
+      {
+        "id": "ami-c8ece1bc",
+        "imageLocation": "amazon/CloudFormer 0.12"
+      },
+      {
+        "id": "ami-23cedf57",
+        "imageLocation": "amazon/CloudFormer 0.20"
+      },
+      {
+        "id": "ami-7f475b0b",
+        "imageLocation": "amazon/CloudFormer 0.21"
+      },
+      {
+        "id": "ami-758f9301",
+        "imageLocation": "amazon/CloudFormer 0.22"
+      },
+      {
+        "id": "ami-f612f481",
+        "imageLocation": "amazon/CloudFormer 0.24"
+      },
+      {
+        "id": "ami-5e52b429",
+        "imageLocation": "amazon/CloudFormer 0.25"
+      },
+      {
+        "id": "ami-1242ae65",
+        "imageLocation": "amazon/CloudFormer 0.26"
+      },
+      {
+        "id": "ami-26688051",
+        "imageLocation": "amazon/CloudFormer 0.27"
+      },
+      {
+        "id": "ami-8567a9f2",
+        "imageLocation": "amazon/CloudFormer 0.28"
+      },
+      {
+        "id": "ami-26c26b51",
+        "imageLocation": "amazon/CloudFormer 0.30"
+      },
+      {
+        "id": "ami-9ab910ed",
+        "imageLocation": "amazon/CloudFormer 0.31"
+      },
+      {
+        "id": "ami-889a33ff",
+        "imageLocation": "amazon/CloudFormer 0.32"
+      },
+      {
+        "id": "ami-dfbd72a8",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-0.9.0-gpu"
+      },
+      {
+        "id": "ami-e3bd7294",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-0.9.0-hvm"
+      },
+      {
+        "id": "ami-f1bd7286",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-0.9.0-pv"
+      },
+      {
+        "id": "ami-cfa168b8",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-gpu"
+      },
+      {
+        "id": "ami-efa16898",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-hvm"
+      },
+      {
+        "id": "ami-e1a16896",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-101d655db21e-docker-1.0.0-pv"
+      },
+      {
+        "id": "ami-d3b97ca4",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-docker-0.9.0-hvm"
+      },
+      {
+        "id": "ami-09b97c7e",
+        "imageLocation": "amazon/elasticbeanstalk-amazon-2014.03.1-docker-0.9.0-pv"
+      },
+      {
+        "id": "ami-33261d47",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat6-32bit-201204191650"
+      },
+      {
+        "id": "ami-978480e3",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat6-32bit-201207161730"
+      },
+      {
+        "id": "ami-35261d41",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat6-64bit-201204191646"
+      },
+      {
+        "id": "ami-ab8480df",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat6-64bit-201207161729"
+      },
+      {
+        "id": "ami-37261d43",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat7-32bit-201204191648"
+      },
+      {
+        "id": "ami-938480e7",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat7-32bit-201207161730"
+      },
+      {
+        "id": "ami-4b261d3f",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat7-64bit-201204191646"
+      },
+      {
+        "id": "ami-958480e1",
+        "imageLocation": "amazon/ElasticBeanstalk-Tomcat7-64bit-201207161729"
+      },
+      {
+        "id": "ami-13042f67",
+        "imageLocation": "amazon/fedora-8-i386-v1.14-std"
+      },
+      {
+        "id": "ami-1d042f69",
+        "imageLocation": "amazon/fedora-8-x86_64-v1.14-std"
+      },
+      {
+        "id": "ami-df1e35ab",
+        "imageLocation": "amazon/getting-started-with-ebs-boot"
+      },
+      {
+        "id": "ami-83605af7",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.05.07"
+      },
+      {
+        "id": "ami-fb0f358f",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.05.16T06.13.45.0000"
+      },
+      {
+        "id": "ami-0d454179",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.06.23T17.45.07.0000"
+      },
+      {
+        "id": "ami-758e8a01",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.07.17T22.44.29.0000"
+      },
+      {
+        "id": "ami-d3e7e0a7",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.08.09T22.53.25.0000"
+      },
+      {
+        "id": "ami-279b9c53",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.08.16T06.47.43.0000"
+      },
+      {
+        "id": "ami-83c6c0f7",
+        "imageLocation": "amazon/PHPBeanstalk32-2012.09.01T02.00.24.0000"
+      },
+      {
+        "id": "ami-f3083287",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.05.07"
+      },
+      {
+        "id": "ami-e50f3591",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.05.16T06.14.45.0000"
+      },
+      {
+        "id": "ami-0f45417b",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.06.23T17.46.06.0000"
+      },
+      {
+        "id": "ami-738e8a07",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.07.17T22.46.20.0000"
+      },
+      {
+        "id": "ami-dfe7e0ab",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.08.09T22.54.35.0000"
+      },
+      {
+        "id": "ami-df9b9cab",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.08.16T08.03.31.0000"
+      },
+      {
+        "id": "ami-95c6c0e1",
+        "imageLocation": "amazon/PHPBeanstalk64-2012.09.01T01.59.38.0000"
+      },
+      {
+        "id": "ami-011b1975",
+        "imageLocation": "amazon/suse-sles-11-sp2-hvm-v1.01.x86_64"
+      },
+      {
+        "id": "ami-0f71497b",
+        "imageLocation": "amazon/suse-sles-11-sp2-rightscale-v1.00.i386"
+      },
+      {
+        "id": "ami-297b435d",
+        "imageLocation": "amazon/suse-sles-11-sp2-rightscale-v1.00.x86_64"
+      },
+      {
+        "id": "ami-6f02001b",
+        "imageLocation": "amazon/suse-sles-11-sp2-sap-v1.01.x86_64"
+      },
+      {
+        "id": "ami-edd1e899",
+        "imageLocation": "amazon/suse-sles-11-sp2-v1.00.i386"
+      },
+      {
+        "id": "ami-a1d1e8d5",
+        "imageLocation": "amazon/suse-sles-11-sp2-v1.00.x86_64"
+      },
+      {
+        "id": "ami-12c66f65",
+        "imageLocation": "amazon/suse-sles-11-sp3-byos-v20141023-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-38c66f4f",
+        "imageLocation": "amazon/suse-sles-11-sp3-byos-v20141023-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-a917d9de",
+        "imageLocation": "amazon/suse-sles-11-sp3-hvm-bld485-v1.0.0.x86_64"
+      },
+      {
+        "id": "ami-61915916",
+        "imageLocation": "amazon/suse-sles-11-sp3-hvm-bld485-v1.0.0.x86_64_ssd"
+      },
+      {
+        "id": "ami-4a5fb53d",
+        "imageLocation": "amazon/suse-sles-11-sp3-hvm-v1.00.x86_64"
+      },
+      {
+        "id": "ami-ae17ccd9",
+        "imageLocation": "amazon/suse-sles-11-sp3-hvm-v20140903.x86_64"
+      },
+      {
+        "id": "ami-720bd005",
+        "imageLocation": "amazon/suse-sles-11-sp3-pv-v20140903.i386"
+      },
+      {
+        "id": "ami-740bd003",
+        "imageLocation": "amazon/suse-sles-11-sp3-pv-v20140903.x86_64"
+      },
+      {
+        "id": "ami-12c33465",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v1.03.x86_64"
+      },
+      {
+        "id": "ami-85e93df2",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v1.05.x86_64"
+      },
+      {
+        "id": "ami-727ed305",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20141003-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-9e7fd2e9",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20141003-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-dea124a9",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20141224-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-78a1240f",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20141224-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-e9c64a9e",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20150127-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-33c54944",
+        "imageLocation": "amazon/suse-sles-11-sp3-rightscale-v20150127-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-c27680b5",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-hvm-v1.00.x86_64"
+      },
+      {
+        "id": "ami-a99647de",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-hvm-v1.02.x86_64"
+      },
+      {
+        "id": "ami-14528963",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-hvm-v20140904.x86_64"
+      },
+      {
+        "id": "ami-b05d86c7",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-pv-v20140904.x86_64"
+      },
+      {
+        "id": "ami-4e0afc39",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v1.00.x86_64"
+      },
+      {
+        "id": "ami-299d4c5e",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v1.02.x86_64"
+      },
+      {
+        "id": "ami-c08427b7",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141003-hvm-mag-x86_64"
+      },
+      {
+        "id": "ami-948427e3",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141003-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-f6842781",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141003-pv-mag-x86_64"
+      },
+      {
+        "id": "ami-d48427a3",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141003-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-aaa722dd",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141224-hvm-mag-x86_64"
+      },
+      {
+        "id": "ami-32a72245",
+        "imageLocation": "amazon/suse-sles-11-sp3-sap-v20141224-pv-mag-x86_64"
+      },
+      {
+        "id": "ami-1fc74b68",
+        "imageLocation": "amazon/suse-sles-11-sp3-sapcal-v20150127-hvm-mag-x86_64"
+      },
+      {
+        "id": "ami-fbc5498c",
+        "imageLocation": "amazon/suse-sles-11-sp3-sapcal-v20150127-pv-mag-x86_64"
+      },
+      {
+        "id": "ami-0bdb157c",
+        "imageLocation": "amazon/suse-sles-11-sp3-v1.0.5.i386"
+      },
+      {
+        "id": "ami-85da14f2",
+        "imageLocation": "amazon/suse-sles-11-sp3-v1.0.5.x86_64"
+      },
+      {
+        "id": "ami-fd110989",
+        "imageLocation": "amazon/suse-sles-11-sp3-v1.00.i386"
+      },
+      {
+        "id": "ami-8d1109f9",
+        "imageLocation": "amazon/suse-sles-11-sp3-v1.00.x86_64"
+      },
+      {
+        "id": "ami-600baa17",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20140928-hvm-mag-x86_64"
+      },
+      {
+        "id": "ami-ae08a9d9",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20140928-pv-mag-x86_64"
+      },
+      {
+        "id": "ami-5a84272d",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141003-hvm-mag-x86_64"
+      },
+      {
+        "id": "ami-30842747",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141003-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-72842705",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141003-pv-mag-x86_64"
+      },
+      {
+        "id": "ami-56842721",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141003-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-50993b27",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141007-pv-ssd-i386"
+      },
+      {
+        "id": "ami-c213b9b5",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141105-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-2a19b35d",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141105-pv-mag-i386"
+      },
+      {
+        "id": "ami-9a1eb4ed",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141105-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-9c813aeb",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141224-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-16813a61",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20141224-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-c9c448be",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20150127-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-17c44860",
+        "imageLocation": "amazon/suse-sles-11-sp3-v20150127-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-b0c76ec7",
+        "imageLocation": "amazon/suse-sles-12-byos-v20141023-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-48c76e3f",
+        "imageLocation": "amazon/suse-sles-12-byos-v20141023-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-e801af9f",
+        "imageLocation": "amazon/suse-sles-12-v20141023-hvm-ssd-x86_64"
+      },
+      {
+        "id": "ami-1804aa6f",
+        "imageLocation": "amazon/suse-sles-12-v20141023-pv-ssd-x86_64"
+      },
+      {
+        "id": "ami-4d9a1b3a",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-32Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-63ae2514",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-32Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-2b9a1b5c",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-32Bit-SQL_2005_SP4_Express-2015.01.14"
+      },
+      {
+        "id": "ami-25ae2552",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-32Bit-SQL_2005_SP4_Express-2015.02.11"
+      },
+      {
+        "id": "ami-499a1b3e",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-59ae252e",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-4b9d1c3c",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-SQL_2005_SP4_Express-2015.01.14"
+      },
+      {
+        "id": "ami-29a3285e",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-SQL_2005_SP4_Express-2015.02.11"
+      },
+      {
+        "id": "ami-d79a1ba0",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-SQL_2005_SP4_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-03ae2574",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-English-64Bit-SQL_2005_SP4_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-1f9a1b68",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-32Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-fdac278a",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-32Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-099c1d7e",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-32Bit-SQL_2005_SP4_Express-2015.01.14"
+      },
+      {
+        "id": "ami-83ac27f4",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-32Bit-SQL_2005_SP4_Express-2015.02.11"
+      },
+      {
+        "id": "ami-5b9c1d2c",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-cbad26bc",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-2f9c1d58",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-SQL_2005_SP4_Express-2015.01.14"
+      },
+      {
+        "id": "ami-93ac27e4",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-SQL_2005_SP4_Express-2015.02.11"
+      },
+      {
+        "id": "ami-f99a1b8e",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-SQL_2005_SP4_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-6bac271c",
+        "imageLocation": "amazon/Windows_Server-2003-R2_SP2-Language_Packs-64Bit-SQL_2005_SP4_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-ff9a1b88",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Chinese_Hong_Kong_SAR-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-33b83344",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Chinese_Hong_Kong_SAR-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-fb9a1b8c",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Chinese_PRC-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-a7b833d0",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Chinese_PRC-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-059a1b72",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-01b83376",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-139a1b64",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Core-2015.01.14"
+      },
+      {
+        "id": "ami-33a62d44",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Core-2015.02.11"
+      },
+      {
+        "id": "ami-2d9a1b5a",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Core_SQL_2012_SP1_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-4bb8333c",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-Core_SQL_2012_SP1_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-f79a1b80",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SharePoint_2010_SP2_Foundation-2015.01.14"
+      },
+      {
+        "id": "ami-29b8335e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SharePoint_2010_SP2_Foundation-2015.02.11"
+      },
+      {
+        "id": "ami-ed9a1b9a",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-07b83370",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-f39c1d84",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-a5bf34d2",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-4b9c1d3c",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Web-2015.01.14"
+      },
+      {
+        "id": "ami-c7b833b0",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2008_R2_SP2_Web-2015.02.11"
+      },
+      {
+        "id": "ami-579c1d20",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Express-2015.01.14"
+      },
+      {
+        "id": "ami-91a42fe6",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Express-2015.02.11"
+      },
+      {
+        "id": "ami-339c1d44",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-e945ce9e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-9f9e1fe8",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Web-2015.01.14"
+      },
+      {
+        "id": "ami-0745ce70",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-English-64Bit-SQL_2012_SP1_Web-2015.02.11"
+      },
+      {
+        "id": "ami-e39a1b94",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-05b83372",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-bb9c1dcc",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-1940cb6e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-d39f1ea4",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-8fbe35f8",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-a59d1cd2",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Web-2015.01.14"
+      },
+      {
+        "id": "ami-b3b833c4",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2008_R2_SP2_Web-2015.02.11"
+      },
+      {
+        "id": "ami-499c1d3e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2012_SP1_Express-2015.01.14"
+      },
+      {
+        "id": "ami-4547cc32",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2012_SP1_Express-2015.02.11"
+      },
+      {
+        "id": "ami-159c1d62",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2012_SP1_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-8f45cef8",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Japanese-64Bit-SQL_2012_SP1_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-079a1b70",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Korean-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-49b8333e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Korean-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-319c1d46",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-8741caf0",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-019c1d76",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-8341caf4",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-b99c1dce",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-3940cb4e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Language_Packs-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-179a1b60",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-8fb833f8",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-299a1b5e",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-Core-2015.01.14"
+      },
+      {
+        "id": "ami-d1a62da6",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-Core-2015.02.11"
+      },
+      {
+        "id": "ami-b39d1cc4",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-77bd3600",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-1d9c1d6a",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-b5b833c2",
+        "imageLocation": "amazon/Windows_Server-2008-R2_SP1-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-bdc141ca",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-c1ac27b6",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d19e1fa6",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-SQL_2008_SP3_Express-2015.01.14"
+      },
+      {
+        "id": "ami-81ac27f6",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-SQL_2008_SP3_Express-2015.02.11"
+      },
+      {
+        "id": "ami-f99e1f8e",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-SQL_2008_SP3_Web-2015.01.14"
+      },
+      {
+        "id": "ami-27a32850",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-32Bit-SQL_2008_SP3_Web-2015.02.11"
+      },
+      {
+        "id": "ami-1b9c1d6c",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-11ac2766",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-f5a52482",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-SQL_2008_SP3_Express-2015.01.14"
+      },
+      {
+        "id": "ami-95ac27e2",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-SQL_2008_SP3_Express-2015.02.11"
+      },
+      {
+        "id": "ami-a5c141d2",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-SQL_2008_SP3_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-5fa32828",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-English-64Bit-SQL_2008_SP3_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-cb9e1fbc",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-32Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-01a32876",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-32Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-b19e1fc6",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-32Bit-SQL_2008_SP3_Express-2015.01.14"
+      },
+      {
+        "id": "ami-f7a32880",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-32Bit-SQL_2008_SP3_Express-2015.02.11"
+      },
+      {
+        "id": "ami-fba5248c",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-13a32864",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-2d9c1d5a",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64Bit-SQL_2008_SP3_Express-2015.01.14"
+      },
+      {
+        "id": "ami-7fa32808",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64Bit-SQL_2008_SP3_Express-2015.02.11"
+      },
+      {
+        "id": "ami-e7a52490",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64bit-SQL_2008_SP3_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-efa32898",
+        "imageLocation": "amazon/Windows_Server-2008-SP2-Portuguese_Brazil-64bit-SQL_2008_SP3_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-9b9c1dec",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-31ae2546",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-459f1e32",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Express-2015.01.14"
+      },
+      {
+        "id": "ami-3fae2548",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Express-2015.02.11"
+      },
+      {
+        "id": "ami-499f1e3e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-1fac2768",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-399f1e4e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Web-2015.01.14"
+      },
+      {
+        "id": "ami-fdae258a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Brazilian-64Bit-SQL_2014_RTM_Web-2015.02.11"
+      },
+      {
+        "id": "ami-c79c1db0",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Simplified-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-53ae2524",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Simplified-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-059c1d72",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Traditional-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-41ae2536",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Traditional-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-a39c1dd4",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Traditional_Hong_Kong-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-49ae253e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Chinese_Traditional_Hong_Kong-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e39c1d94",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Czech-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-37ae2540",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Czech-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-db9c1dac",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Dutch-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-45ae2532",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Dutch-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e99c1d9e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-69ae251e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e79a1b90",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-Core-2015.01.14"
+      },
+      {
+        "id": "ami-7fae2508",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-Core-2015.02.11"
+      },
+      {
+        "id": "ami-799f1e0e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Express-2015.01.14"
+      },
+      {
+        "id": "ami-fbae258c",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Express-2015.02.11"
+      },
+      {
+        "id": "ami-f59e1f82",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-7dac270a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-019e1f76",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Web-2015.01.14"
+      },
+      {
+        "id": "ami-f7ad2680",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-English-64Bit-SQL_2014_RTM_Web-2015.02.11"
+      },
+      {
+        "id": "ami-e19c1d96",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-French-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-51ae2526",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-French-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d59c1da2",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-German-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-5dae252a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-German-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d79c1da0",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Hungarian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-47ae2530",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Hungarian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e79c1d90",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Italian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-4bae253c",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Italian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-ed9c1d9a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-f1ae2586",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-41fe7d36",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Express-2015.01.14"
+      },
+      {
+        "id": "ami-37088340",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Express-2015.02.11"
+      },
+      {
+        "id": "ami-fd9e1f8a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-f3ae2584",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-d79e1fa0",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Web-2015.01.14"
+      },
+      {
+        "id": "ami-efae2598",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Japanese-64Bit-SQL_2014_RTM_Web-2015.02.11"
+      },
+      {
+        "id": "ami-d99c1dae",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Korean-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-09ae257e",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Korean-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-ab9c1ddc",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Polish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-57ae2520",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Polish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d59f1ea2",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Portuguese-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-6fae2518",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Portuguese-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d39c1da4",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Russian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-01ae2576",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Russian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-bf9c1dc8",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Spanish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-35ae2542",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Spanish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-cb9c1dbc",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Swedish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-4dae253a",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Swedish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-bd9c1dca",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Turkish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-55ae2522",
+        "imageLocation": "amazon/Windows_Server-2012-R2_RTM-Turkish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-1f9e1f68",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Simplified-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-1bac276c",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Simplified-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-ff9e1f88",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Traditional-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-99ac27ee",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Traditional-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-039e1f74",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Traditional_Hong_Kong_SAR-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-2dac275a",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Chinese_Traditional_Hong_Kong_SAR-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e39e1f94",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Czech-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-e5ac2792",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Czech-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-47a22330",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Dutch-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-e3ac2794",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Dutch-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-eb9f1e9c",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-e7ac2790",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-199e1f6e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-b7ac27c0",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-e79e1f90",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-19ac276e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-ef9e1f98",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Web-2015.01.14"
+      },
+      {
+        "id": "ami-f1ac2786",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2008_R2_SP2_Web-2015.02.11"
+      },
+      {
+        "id": "ami-65a12012",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Express-2015.01.14"
+      },
+      {
+        "id": "ami-bfac27c8",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Express-2015.02.11"
+      },
+      {
+        "id": "ami-919e1fe6",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-dbac27ac",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-39a2234e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Web-2015.01.14"
+      },
+      {
+        "id": "ami-bda328ca",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2012_SP1_Web-2015.02.11"
+      },
+      {
+        "id": "ami-559e1f22",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Express-2015.01.14"
+      },
+      {
+        "id": "ami-c7ac27b0",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Express-2015.02.11"
+      },
+      {
+        "id": "ami-43a22334",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-43a32834",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-73a12004",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Web-2015.01.14"
+      },
+      {
+        "id": "ami-57a32820",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-English-64Bit-SQL_2014_RTM_Web-2015.02.11"
+      },
+      {
+        "id": "ami-3f9e1f48",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-French-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-31ac2746",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-French-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-a19f1ed6",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-German-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-f5ac2782",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-German-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-d19f1ea6",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Hungarian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-39ac274e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Hungarian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-7d9f1e0a",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Italian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-d9ac27ae",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Italian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-859c1df2",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-abac27dc",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-0d9e1f7a",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-79a3280e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-c39e1fb4",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-cdac27ba",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-959e1fe2",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Express-2015.01.14"
+      },
+      {
+        "id": "ami-69a3281e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Express-2015.02.11"
+      },
+      {
+        "id": "ami-63a12014",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-f3ac2784",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-7fa12008",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Web-2015.01.14"
+      },
+      {
+        "id": "ami-adac27da",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2012_SP1_Web-2015.02.11"
+      },
+      {
+        "id": "ami-999f1eee",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Express-2015.01.14"
+      },
+      {
+        "id": "ami-27ac2750",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Express-2015.02.11"
+      },
+      {
+        "id": "ami-69a5241e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-77a32800",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-35a22342",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Web-2015.01.14"
+      },
+      {
+        "id": "ami-2bac275c",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Japanese-64Bit-SQL_2014_RTM_Web-2015.02.11"
+      },
+      {
+        "id": "ami-ed9e1f9a",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Korean-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-ebac279c",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Korean-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-5f9f1e28",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Polish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-b5ac27c2",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Polish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-cf9e1fb8",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-d3ac27a4",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-539f1e24",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-6fac2718",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-e59e1f92",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Express-2015.01.14"
+      },
+      {
+        "id": "ami-cfac27b8",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Express-2015.02.11"
+      },
+      {
+        "id": "ami-099e1f7e",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Standard-2015.01.14"
+      },
+      {
+        "id": "ami-87ac27f0",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Portuguese_Brazil-64Bit-SQL_2008_R2_SP2_Standard-2015.02.11"
+      },
+      {
+        "id": "ami-8b9c1dfc",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Russian-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-0bac277c",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Russian-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-0f9e1f78",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Spanish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-dfac27a8",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Spanish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-ed9f1e9a",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Swedish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-03ac2774",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Swedish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-559f1e22",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Turkish-64Bit-Base-2015.01.14"
+      },
+      {
+        "id": "ami-e1ac2796",
+        "imageLocation": "amazon/Windows_Server-2012-RTM-Turkish-64Bit-Base-2015.02.11"
+      },
+      {
+        "id": "ami-889db7fc",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.7-beta.i386.manifest.xml"
+      },
+      {
+        "id": "ami-8a9db7fe",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.7-beta.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-9e7540ea",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.8-beta.i386.manifest.xml"
+      },
+      {
+        "id": "ami-927540e6",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.8-beta.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-64310410",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.9-beta.i386.manifest.xml"
+      },
+      {
+        "id": "ami-7a31040e",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-0.9.9-beta.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-39eedb4d",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2010.11.1-beta.i386.manifest.xml"
+      },
+      {
+        "id": "ami-3beedb4f",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2010.11.1-beta.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-7fcefa0b",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.02.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-7bcefa0f",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.02.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-36506242",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-3850624c",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-bb3b06cf",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.09.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-a33b06d7",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-2011.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-2d09eb5a",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2013.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-8659b7f1",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2013.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-0f21df78",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.03.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-ad19e2da",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-af2fe1d8",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.03.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-828f28f5",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-1278da65",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-9b23aeec",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-hvm-2014.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-bf2fe1c8",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-hvm-2014.03.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-948f28e3",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-hvm-2014.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-4c79db3b",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-hvm-2014.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-c522afb2",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-hvm-2014.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-e7747493",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2012.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-e3747497",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2012.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-145e5660",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2012.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-1e5e566a",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2012.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-b89298cc",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.03.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-969298e2",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.03.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-1dc0d669",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.03.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-09c0d67d",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-369f7841",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-389f784f",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-69ec0e1e",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-4fec0e38",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-b259b7c5",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-9459b7e3",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2013.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-0121df76",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-0921df7e",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-b319e2c4",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-9f19e2e8",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-ad2fe1da",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-ab2fe1dc",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.03.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-f28f2885",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-f08f2887",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-c475d7b3",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-767bd901",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-65ce4212",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-8722aff0",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-minimal-pv-2014.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-fb231b8f",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-ff231b8b",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-83b7b2f7",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-73b1b407",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-6b55511f",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.3.i386.manifest.xml"
+      },
+      {
+        "id": "ami-53555127",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.03.3.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-cf7474bb",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-b57474c1",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-965e56e2",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-325f5746",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2012.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-849298f0",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.03.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-5e93992a",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.03.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-d5c0d6a1",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.03.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-d9c0d6ad",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-129f7865",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-1e9f7869",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-0dec0e7a",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-f1ec0e86",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-6056b817",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-5456b823",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2013.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-b921dfce",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-a121dfd6",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-2f18e358",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-0318e374",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-732ce204",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-7b2ce20c",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.03.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-968f28e1",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.0.i386.manifest.xml"
+      },
+      {
+        "id": "ami-ae8f28d9",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.0.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-8078daf7",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.1.i386.manifest.xml"
+      },
+      {
+        "id": "ami-267bd951",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.1.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-0fce4278",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.2.i386.manifest.xml"
+      },
+      {
+        "id": "ami-693db01e",
+        "imageLocation": "amzn-ami-eu-west-1/amzn-ami-pv-2014.09.2.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-5ea34529",
+        "imageLocation": "amzn-ami-eu-west-1/pv-grub-hd00_1.04-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-58a3452f",
+        "imageLocation": "amzn-ami-eu-west-1/pv-grub-hd00_1.04-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-68a3451f",
+        "imageLocation": "amzn-ami-eu-west-1/pv-grub-hd0_1.04-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-52a34525",
+        "imageLocation": "amzn-ami-eu-west-1/pv-grub-hd0_1.04-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-fce8478b",
+        "imageLocation": "amzn-ami-eu-west-1/pv-grub2-hd0_2.02-1.b2-x86_64.xz.manifest.xml"
+      },
+      {
+        "id": "ami-beebc3ca",
+        "imageLocation": "aws-console-quickstart-amis-eu-west-1/phpquickstart-v1.4.manifest.xml"
+      },
+      {
+        "id": "ami-f04f6484",
+        "imageLocation": "aws-console-quickstart-amis-eu-west-1/phpquickstart-v1.5.manifest.xml"
+      },
+      {
+        "id": "ami-38163e4c",
+        "imageLocation": "aws-console-quickstart-amis-eu-west-1/phpquickstart.manifest.xml"
+      },
+      {
+        "id": "ami-f24f6486",
+        "imageLocation": "aws-console-quickstart-amis-eu-west-1/rubyquickstart-v1.1.manifest.xml"
+      },
+      {
+        "id": "ami-20163e54",
+        "imageLocation": "aws-console-quickstart-amis-eu-west-1/rubyquickstart.manifest.xml"
+      },
+      {
+        "id": "ami-10163e64",
+        "imageLocation": "aws-toolkit-for-eclipse-amis-eu/haproxy-v1.0.2.manifest.xml"
+      },
+      {
+        "id": "ami-28163e5c",
+        "imageLocation": "aws-toolkit-for-eclipse-amis-eu/tomcat-v1.0.0.manifest.xml"
+      },
+      {
+        "id": "ari-0b3d097f",
+        "imageLocation": "ec2-ibm-lotus-eu-west/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-93487ce7",
+        "imageLocation": "ec2-ibm-lotus-eu-west/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-a3fbc6d7",
+        "imageLocation": "ec2-ibm-websphere-eu-west/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-fc94a588",
+        "imageLocation": "ec2-ibm-websphere-eu-west/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-b33805c7",
+        "imageLocation": "ec2-ibm-websphere-eu-west/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-f294a586",
+        "imageLocation": "ec2-ibm-websphere-eu-west/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-f0b59f84",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-01ffd475",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-1898b26c",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-f9ffd48d",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-07ffd473",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-0ab59f7e",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-1e98b26a",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-ffffd48b",
+        "imageLocation": "ec2-paid-ibm-images-db2-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-e4cbe390",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-445f7430",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-d3ecc7a7",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-622d0616",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-9e7358ea",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-32765d46",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-f8cbe38c",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-30765d44",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-5d133829",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-36765d42",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-b30922c7",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-a78da5d3",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-2096be54",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-3291b946",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-facbe38e",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-9b8da5ef",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-6496be10",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-d4cbe3a0",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-2c96be58",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-dbecc7af",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-f5e8dc81",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-e8cbe39c",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-eacbe39e",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-39face4d",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-f909228d",
+        "imageLocation": "ec2-paid-ibm-images-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-998da5ed",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-fecbe38a",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-55133821",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-602d0614",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-b10922c5",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-ddecc7a9",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-5a5f742e",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-4a765d3e",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-f2cbe386",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-7a96be0e",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-b98da5cd",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-48765d3c",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-3091b944",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-fccbe388",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-2696be52",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-9c7358e8",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-34765d40",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-03e8dc77",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-e0cbe394",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-2296be56",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-e2cbe396",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-e6cbe392",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-fd092289",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-d9ecc7ad",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-33face47",
+        "imageLocation": "ec2-paid-ibm-images-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-6be2c91f",
+        "imageLocation": "ec2-paid-ibm-images-ids-eu/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-57e2c923",
+        "imageLocation": "ec2-paid-ibm-images-ids-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-69e2c91d",
+        "imageLocation": "ec2-paid-ibm-images-ids-eu/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-51e2c925",
+        "imageLocation": "ec2-paid-ibm-images-ids-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-59e1ca2d",
+        "imageLocation": "ec2-paid-ibm-images-infosphere-eu/initrd-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-5fe1ca2b",
+        "imageLocation": "ec2-paid-ibm-images-infosphere-eu/vmlinuz-2.6.16.60-0.30-xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ari-02af8576",
+        "imageLocation": "ec2-paid-ibm-was-eu-west-1/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ari-a33b11d7",
+        "imageLocation": "ec2-paid-ibm-was-eu-west-1/initrd-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-00af8574",
+        "imageLocation": "ec2-paid-ibm-was-eu-west-1/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "aki-a13b11d5",
+        "imageLocation": "ec2-paid-ibm-was-eu-west-1/vmlinuz-2.6.16.60-0.29-xenpae.i386.manifest.xml"
+      },
+      {
+        "id": "ami-5d0d2529",
+        "imageLocation": "ec2-public-images-eu/demo-paid-AMI-v1.07.manifest.xml"
+      },
+      {
+        "id": "ari-7d0d2509",
+        "imageLocation": "ec2-public-images-eu/ec2-initrd-2.6.21.7-2.fc8xen.i386.manifest.xml"
+      },
+      {
+        "id": "ari-7f0d250b",
+        "imageLocation": "ec2-public-images-eu/ec2-initrd-2.6.21.7-2.fc8xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "aki-7e0d250a",
+        "imageLocation": "ec2-public-images-eu/ec2-vmlinuz-2.6.21.7-2.fc8xen.i386.manifest.xml"
+      },
+      {
+        "id": "aki-780d250c",
+        "imageLocation": "ec2-public-images-eu/ec2-vmlinuz-2.6.21.7-2.fc8xen.x86_64.manifest.xml"
+      },
+      {
+        "id": "ami-520d2526",
+        "imageLocation": "ec2-public-images-eu/fedora-8-i386-base-v1.07.manifest.xml"
+      },
+      {
+        "id": "ami-2a0f275e",
+        "imageLocation": "ec2-public-images-eu/fedora-8-i386-base-v1.08.manifest.xml"
+      },
+      {
+        "id": "ami-0a48637e",
+        "imageLocation": "ec2-public-images-eu/fedora-8-i386-base-v1.10.manifest.xml"
+      },
+      {
+        "id": "ami-2e0f275a",
+        "imageLocation": "ec2-public-images-eu/fedora-8-x86_64-base-v1.08.manifest.xml"
+      },
+      {
+        "id": "ami-927a51e6",
+        "imageLocation": "ec2-public-images-eu/fedora-8-x86_64-base-v1.10.manifest.xml"
+      },
+      {
+        "id": "ami-e40f2790",
+        "imageLocation": "ec2-public-images-eu/getting-started.manifest.xml"
+      },
+      {
+        "id": "ari-f6193182",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.0.i386.ari.manifest.xml"
+      },
+      {
+        "id": "ari-f4193180",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.0.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-906a41e4",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.2.i386.ari.manifest.xml"
+      },
+      {
+        "id": "ari-946a41e0",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.2.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-d5eec5a1",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.4.i686.ari.manifest.xml"
+      },
+      {
+        "id": "ari-d1eec5a5",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.4.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-f4615480",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.5-i686.ari.manifest.xml"
+      },
+      {
+        "id": "ari-f6615482",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.18-xenU-ec2-v1.5-x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-6b0d251f",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.20-1.3002.fc6xen.ari.manifest.xml"
+      },
+      {
+        "id": "ari-63022917",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.ec2.v1.2.fc8xen.i686.ari.manifest.xml"
+      },
+      {
+        "id": "ari-37022943",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.ec2.v1.2.fc8xen.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-30407544",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.ec2.v1.3.fc8xen.i686.img.manifest.xml"
+      },
+      {
+        "id": "ari-f0615484",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.ec2.v1.3.fc8xen.x86_64.img.manifest.xml"
+      },
+      {
+        "id": "ari-fa4d668e",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.fc8xen-ec2-v1.0.1.i386.ari.manifest.xml"
+      },
+      {
+        "id": "ari-e44d6690",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.fc8xen-ec2-v1.0.1.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "ari-aa6348de",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.fc8xen-ec2-v1.0.i386.ari.manifest.xml"
+      },
+      {
+        "id": "ari-a06348d4",
+        "imageLocation": "ec2-public-images-eu/initrd-2.6.21.7-2.fc8xen-ec2-v1.0.x86_64.ari.manifest.xml"
+      },
+      {
+        "id": "aki-4deec439",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0-V1.01-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-4feec43b",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0-V1.01-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-47eec433",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00-V1.01-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-41eec435",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00-V1.01-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-8a6657fe",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00_1.02-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-60695814",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00_1.02-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-89655dfd",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00_1.03-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-8b655dff",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd00_1.03-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-64695810",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0_1.02-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-62695816",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0_1.02-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-75665e01",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0_1.03-i386.gz.manifest.xml"
+      },
+      {
+        "id": "aki-71665e05",
+        "imageLocation": "ec2-public-images-eu/pv-grub-hd0_1.03-x86_64.gz.manifest.xml"
+      },
+      {
+        "id": "aki-540d2520",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.0.i386.aki.manifest.xml"
+      },
+      {
+        "id": "aki-550d2521",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.0.x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-966a41e2",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.2.i386.aki.manifest.xml"
+      },
+      {
+        "id": "aki-aa6a41de",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.2.x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-ebeec59f",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.4.i686.aki.manifest.xml"
+      },
+      {
+        "id": "aki-d7eec5a3",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.4.x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-fc615488",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.5-i686.aki.manifest.xml"
+      },
+      {
+        "id": "aki-fe61548a",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.18-xenU-ec2-v1.5-x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-6a0d251e",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.20-1.3002.fc6xen.aki.manifest.xml"
+      },
+      {
+        "id": "aki-02486376",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21-2.fc8xen-ec2-v1.0.i386.aki.manifest.xml"
+      },
+      {
+        "id": "aki-f2634886",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21-2.fc8xen-ec2-v1.0.x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-61022915",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21.7-2.ec2.v1.2.fc8xen.i686.aki.manifest.xml"
+      },
+      {
+        "id": "aki-6d022919",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21.7-2.ec2.v1.2.fc8xen.x86_64.aki.manifest.xml"
+      },
+      {
+        "id": "aki-e2615496",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21.7-2.ec2.v1.3.fc8xen.manifest.xml"
+      },
+      {
+        "id": "aki-f861548c",
+        "imageLocation": "ec2-public-images-eu/vmlinuz-2.6.21.7-2.ec2.v1.3.fc8xen.x86_64.manifest.xml"
+      }
+    ],
+    "keys": ["m2hkey", "vpnkey"],
+    "spotUrl": "http://aws.amazon.com/ec2/spot-instances/"
+  }
+}
