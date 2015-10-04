@@ -32,12 +32,13 @@ describe(__filename, function() {
 
   describe('create', () => {
 
-    describe('with asgard_host and aws_region', () => {
+    describe('with asgard_host, aws_region, basic_auth', () => {
 
       it('should return object with public functions', () => {
         const asgard_host = 'http://localhost:3001';
         const aws_region = 'eu-west-1';
-        const client = asgard_client.create(asgard_host, aws_region);
+        const basic_auth = { username: 'user', password: 'secret' };
+        const client = asgard_client.create(asgard_host, aws_region, basic_auth);
         client.should.have.keys([
           'prepareDeployment',
           'startDeployment',
