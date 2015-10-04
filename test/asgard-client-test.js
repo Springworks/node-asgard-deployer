@@ -5,7 +5,6 @@ const fixture_loader = require('../test-util/fixture-loader');
 const internals = {};
 
 describe(__filename, function() {
-  let client;
   let mock_api_client;
   let sinon_sandbox;
 
@@ -26,15 +25,9 @@ describe(__filename, function() {
         opt_auth: {
           user: 'user',
           pass: 'password',
-        }
-      }
+        },
+      },
     });
-  });
-
-  beforeEach(() => {
-    const asgard_host = 'http://localhost:3001';
-    const aws_region = 'eu-west-1';
-    client = asgard_client.create(asgard_host, aws_region);
   });
 
   describe('create', () => {
@@ -162,26 +155,26 @@ describe(__filename, function() {
         const opts = asgard_client.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
         const zero_downtime_steps = [
           {
-            "type": "CreateAsg"
+            type: 'CreateAsg',
           },
           {
-            "type": "Resize",
-            "targetAsg": "Next",
-            "capacity": 2,
-            "startUpTimeoutMinutes": 20,
+            type: 'Resize',
+            targetAsg: 'Next',
+            capacity: 2,
+            startUpTimeoutMinutes: 20,
           },
           {
-            "type": "Wait",
-            "durationMinutes": "5",
+            type: 'Wait',
+            durationMinutes: '5',
           },
           {
-            "type": "DisableAsg",
-            "targetAsg": "Previous",
+            type: 'DisableAsg',
+            targetAsg: 'Previous',
           },
           {
-            "type": "DeleteAsg",
-            "targetAsg": "Previous",
-          }
+            type: 'DeleteAsg',
+            targetAsg: 'Previous',
+          },
         ];
         opts.deploymentOptions.should.have.property('steps', zero_downtime_steps);
       });
