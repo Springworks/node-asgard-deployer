@@ -31,7 +31,7 @@ describe(__filename, function() {
     deployer_instance = deployer.create(asgard_service_instance);
   });
 
-  describe('start', () => {
+  describe('startDeploymentInCluster', () => {
 
     describe('with valid env vars', () => {
 
