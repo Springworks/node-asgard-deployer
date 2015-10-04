@@ -16,4 +16,4 @@ Create a new automated deployment based on the most recently created auto-scalin
 node ./deploy.js "<cluster name>" <wait to complete>
 ```
 - `<cluster name>`: name of the Asgard cluster
-- `<wait to complete>`: `true | false`, deciding if process should be kept alive until entire deployment has completed (several minute)
+- `<wait to complete>`: `true | false`, deciding if process should be kept alive until entire deployment has completed (several minutes)
