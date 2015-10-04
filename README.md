@@ -13,6 +13,7 @@ Executes automated deployments in [Asgard](https://github.com/Netflix/asgard).
 
 Create a new automated deployment based on the most recently created auto-scaling group in the cluster:
 ```sh
-node ./deploy.js "<cluster name>"
+node ./deploy.js "<cluster name>" <wait to complete>
 ```
 - `<cluster name>`: name of the Asgard cluster
+- `<wait to complete>`: `true | false`, deciding if process should be kept alive until entire deployment has completed (several minute)
