@@ -82,6 +82,15 @@ describe(__filename, function() {
             .should.be.fulfilledWith(mocked_asgard_response);
       });
 
+      it('should expect status code 200 OK', () => {
+        return asgard_service.internals
+            .prepareDeployment(mock_api_client, cluster_name)
+            .then(() => {
+              const expected_status_codes = send_request_stub.getCall(0).args[1];
+              expected_status_codes.should.eql([200]);
+            });
+      });
+
     });
 
   });
@@ -129,6 +138,15 @@ describe(__filename, function() {
         return asgard_service.internals
             .startDeployment(mock_api_client, launch_config_options)
             .should.be.fulfilledWith(mocked_asgard_response);
+      });
+
+      it('should expect status code 200 OK', () => {
+        return asgard_service.internals
+            .startDeployment(mock_api_client, launch_config_options)
+            .then(() => {
+              const expected_status_codes = send_request_stub.getCall(0).args[1];
+              expected_status_codes.should.eql([200]);
+            });
       });
 
     });
@@ -215,6 +233,15 @@ describe(__filename, function() {
               req_params.should.have.property('json');
               req_params.should.have.property('method', 'get');
               req_params.should.have.property('endpoint_uri', `/deployment/show/${deployment_id}.json`);
+            });
+      });
+
+      it('should expect status code 200 OK', () => {
+        return asgard_service.internals
+            .getDeployment(mock_api_client, deployment_id)
+            .then(() => {
+              const expected_status_codes = send_request_stub.getCall(0).args[1];
+              expected_status_codes.should.eql([200]);
             });
       });
 
