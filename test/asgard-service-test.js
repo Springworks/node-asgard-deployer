@@ -1,5 +1,5 @@
 const api_client = require('@springworks/api-client');
-const asgard_client = require('../lib/asgard-client');
+const asgard_service = require('../lib/asgard-service');
 const logger = require('../lib/logger');
 const fixture_loader = require('../test-util/fixture-loader');
 const internals = {};
@@ -38,8 +38,8 @@ describe(__filename, function() {
         const asgard_host = 'http://localhost:3001';
         const aws_region = 'eu-west-1';
         const basic_auth = { username: 'user', password: 'secret' };
-        const client = asgard_client.create(asgard_host, aws_region, basic_auth);
-        client.should.have.keys([
+        const service = asgard_service.create(asgard_host, aws_region, basic_auth);
+        service.should.have.keys([
           'prepareDeployment',
           'startDeployment',
           'getDeployment',
@@ -66,7 +66,7 @@ describe(__filename, function() {
       const cluster_name = 'asteroids';
 
       it('should make a GET request to Asgard preparing deployment', () => {
-        return asgard_client.internals.prepareDeployment(mock_api_client, cluster_name).then(() => {
+        return asgard_service.internals.prepareDeployment(mock_api_client, cluster_name).then(() => {
           send_request_stub.should.have.callCount(1);
           const req_params = send_request_stub.getCall(0).args[0];
           req_params.should.have.property('method', 'get');
@@ -77,7 +77,7 @@ describe(__filename, function() {
       });
 
       it('should resolve with response from Asgard API', () => {
-        return asgard_client.internals
+        return asgard_service.internals
             .prepareDeployment(mock_api_client, cluster_name)
             .should.be.fulfilledWith(mocked_asgard_response);
       });
@@ -109,7 +109,7 @@ describe(__filename, function() {
       });
 
       it('should make a POST request to Asgard starting deployment', () => {
-        return asgard_client.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
+        return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
           send_request_stub.should.have.callCount(1);
           const req_params = send_request_stub.getCall(0).args[0];
           req_params.should.have.property('method', 'post');
@@ -118,7 +118,7 @@ describe(__filename, function() {
       });
 
       it('should define deployment options in request body', () => {
-        return asgard_client.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
+        return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
           const req_params = send_request_stub.getCall(0).args[0];
           req_params.should.have.property('json');
           req_params.json.should.have.property('deploymentOptions');
@@ -126,7 +126,7 @@ describe(__filename, function() {
       });
 
       it('should resolve with response from Asgard API', () => {
-        return asgard_client.internals
+        return asgard_service.internals
             .startDeployment(mock_api_client, launch_config_options)
             .should.be.fulfilledWith(mocked_asgard_response);
       });
@@ -148,12 +148,12 @@ describe(__filename, function() {
       });
 
       it('should define cluster name in deployment options', () => {
-        const opts = asgard_client.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
+        const opts = asgard_service.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
         opts.deploymentOptions.should.have.property('clusterName', cluster_name);
       });
 
       it('should define deployment options for zero-downtime deployment', () => {
-        const opts = asgard_client.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
+        const opts = asgard_service.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
         const zero_downtime_steps = [
           {
             type: 'CreateAsg',
@@ -181,7 +181,7 @@ describe(__filename, function() {
       });
 
       it('should use auto-scaling group and launch config options as-is', () => {
-        const opts = asgard_client.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
+        const opts = asgard_service.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
         opts.should.have.properties({
           asgOptions: asg_options,
           lcOptions: launch_config_options,
@@ -208,7 +208,7 @@ describe(__filename, function() {
       const deployment_id = 1051;
 
       it('should GET {host}/{region}/deployment/show/{deployment_id}.json', () => {
-        return asgard_client.internals
+        return asgard_service.internals
             .getDeployment(mock_api_client, deployment_id)
             .then(() => {
               const req_params = send_request_stub.getCall(0).args[0];
@@ -219,7 +219,7 @@ describe(__filename, function() {
       });
 
       it('should resolve with response from API', () => {
-        return asgard_client.internals.getDeployment(mock_api_client, deployment_id).should.be.fulfilledWith(mocked_asgard_response);
+        return asgard_service.internals.getDeployment(mock_api_client, deployment_id).should.be.fulfilledWith(mocked_asgard_response);
       });
 
     });
