@@ -31,7 +31,7 @@ describe(__filename, function() {
     deployer_instance = deployer.create(asgard_service_instance);
   });
 
-  describe('startDeploymentInCluster', () => {
+  describe('makeDeploymentInCluster', () => {
 
     describe('with valid env vars', () => {
 
@@ -39,14 +39,14 @@ describe(__filename, function() {
         const cluster_name = 'milky-way';
 
         it('should use asgard-client to prepare deployment', () => {
-          return deployer_instance.startDeploymentInCluster(cluster_name).then(() => {
+          return deployer_instance.makeDeploymentInCluster(cluster_name).then(() => {
             asgard_service_instance.prepareDeployment.should.have.callCount(1);
             asgard_service_instance.prepareDeployment.getCall(0).args[0].should.eql(cluster_name);
           });
         });
 
         it('should use asgard-client to start prepared deployment', () => {
-          return deployer_instance.startDeploymentInCluster(cluster_name).then(() => {
+          return deployer_instance.makeDeploymentInCluster(cluster_name).then(() => {
             asgard_service_instance.startDeployment.should.have.callCount(1);
 
             const start_deployment_args = asgard_service_instance.startDeployment.getCall(0).args;
