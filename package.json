@@ -8,6 +8,9 @@
     "test": "NODE_ENV=test istanbul cover _mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
+  "bin": { 
+    "asgard-deployer": "./deploy.js"
+  },
   "engines": {
     "npm": ">=2.7.0"
   },
