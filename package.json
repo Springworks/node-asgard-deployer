@@ -1,6 +1,6 @@
 {
   "name": "asgard-deployer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Executes automated deployments in Asgard",
   "main": "deploy.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "NODE_ENV=test istanbul cover _mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
-  "bin": { 
+  "bin": {
     "asgard-deployer": "./deploy.js"
   },
   "engines": {
