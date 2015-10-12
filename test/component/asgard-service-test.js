@@ -2,6 +2,7 @@ const api_client = require('@springworks/api-client');
 const asgard_service = require('../../lib/asgard-service');
 const logger = require('../../lib/logger');
 const fixture_loader = require('../../test-util/fixture-loader');
+const error_factory = require('@springworks/error-factory');
 const internals = {};
 
 describe(__filename, () => {
@@ -52,43 +53,62 @@ describe(__filename, () => {
 
   describe('internals.prepareDeployment', () => {
     let send_request_stub;
-    let mocked_asgard_response;
-
-    beforeEach(() => {
-      mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/prepare-deployment.json');
-    });
-
-    beforeEach(function stubSendRequest() {
-      send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
-    });
 
     describe('with a valid cluster_name', () => {
       const cluster_name = 'asteroids';
 
-      it('should make a GET request to Asgard preparing deployment', () => {
-        return asgard_service.internals.prepareDeployment(mock_api_client, cluster_name).then(() => {
-          send_request_stub.should.have.callCount(1);
-          const req_params = send_request_stub.getCall(0).args[0];
-          req_params.should.have.property('method', 'get');
-          req_params.should.have.property('endpoint_uri', `/deployment/prepare/${cluster_name}`);
-          req_params.qs.should.have.property('deploymentTemplateName', 'CreateAndCleanUpPreviousAsg');
-          req_params.qs.should.have.property('includeEnvironment', true);
+      describe('when Asgard API is healthy', () => {
+        let mocked_asgard_response;
+
+        beforeEach(() => {
+          mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/prepare-deployment.json');
         });
+
+        beforeEach(function stubSendRequest() {
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
+        });
+
+        it('should make a GET request to Asgard preparing deployment', () => {
+          return asgard_service.internals.prepareDeployment(mock_api_client, cluster_name).then(() => {
+            send_request_stub.should.have.callCount(1);
+            const req_params = send_request_stub.getCall(0).args[0];
+            req_params.should.have.property('method', 'get');
+            req_params.should.have.property('endpoint_uri', `/deployment/prepare/${cluster_name}`);
+            req_params.qs.should.have.property('deploymentTemplateName', 'CreateAndCleanUpPreviousAsg');
+            req_params.qs.should.have.property('includeEnvironment', true);
+          });
+        });
+
+        it('should resolve with response from Asgard API', () => {
+          return asgard_service.internals
+              .prepareDeployment(mock_api_client, cluster_name)
+              .should.be.fulfilledWith(mocked_asgard_response);
+        });
+
+        it('should expect status code 200 OK', () => {
+          return asgard_service.internals
+              .prepareDeployment(mock_api_client, cluster_name)
+              .then(() => {
+                const expected_status_codes = send_request_stub.getCall(0).args[1];
+                expected_status_codes.should.eql([200]);
+              });
+        });
+
       });
 
-      it('should resolve with response from Asgard API', () => {
-        return asgard_service.internals
-            .prepareDeployment(mock_api_client, cluster_name)
-            .should.be.fulfilledWith(mocked_asgard_response);
-      });
+      describe('when Asgard API fails', () => {
 
-      it('should expect status code 200 OK', () => {
-        return asgard_service.internals
-            .prepareDeployment(mock_api_client, cluster_name)
-            .then(() => {
-              const expected_status_codes = send_request_stub.getCall(0).args[1];
-              expected_status_codes.should.eql([200]);
-            });
+        beforeEach(function stubSendRequest() {
+          const mock_err = error_factory.create(500, 'Mocked Asgard error');
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
+        });
+
+        it('should reject promise', () => {
+          return asgard_service.internals
+              .prepareDeployment(mock_api_client, cluster_name)
+              .should.be.rejectedWith({ code: 500 });
+        });
+
       });
 
     });
@@ -97,17 +117,8 @@ describe(__filename, () => {
 
   describe('internals.startDeployment', () => {
     let send_request_stub;
-    let mocked_asgard_response;
 
-    beforeEach(() => {
-      mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/start-deployment.json');
-    });
-
-    beforeEach(function stubSendRequest() {
-      send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
-    });
-
-    describe('with a valid params', () => {
+    describe('with valid params', () => {
       const cluster_name = 'asteroids';
       let launch_config_options;
       let asg_options;
@@ -117,36 +128,64 @@ describe(__filename, () => {
         asg_options = internals.mockAsgOptions();
       });
 
-      it('should make a POST request to Asgard starting deployment', () => {
-        return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
-          send_request_stub.should.have.callCount(1);
-          const req_params = send_request_stub.getCall(0).args[0];
-          req_params.should.have.property('method', 'post');
-          req_params.should.have.property('endpoint_uri', '/deployment/start');
+      describe('when Asgard API is healthy', () => {
+        let mocked_asgard_response;
+
+        beforeEach(() => {
+          mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/start-deployment.json');
         });
-      });
 
-      it('should define deployment options in request body', () => {
-        return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
-          const req_params = send_request_stub.getCall(0).args[0];
-          req_params.should.have.property('json');
-          req_params.json.should.have.property('deploymentOptions');
+        beforeEach(function stubSendRequest() {
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
         });
+
+        it('should make a POST request to Asgard starting deployment', () => {
+          return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
+            send_request_stub.should.have.callCount(1);
+            const req_params = send_request_stub.getCall(0).args[0];
+            req_params.should.have.property('method', 'post');
+            req_params.should.have.property('endpoint_uri', '/deployment/start');
+          });
+        });
+
+        it('should define deployment options in request body', () => {
+          return asgard_service.internals.startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options).then(() => {
+            const req_params = send_request_stub.getCall(0).args[0];
+            req_params.should.have.property('json');
+            req_params.json.should.have.property('deploymentOptions');
+          });
+        });
+
+        it('should resolve with response from Asgard API', () => {
+          return asgard_service.internals
+              .startDeployment(mock_api_client, launch_config_options)
+              .should.be.fulfilledWith(mocked_asgard_response);
+        });
+
+        it('should expect status code 200 OK', () => {
+          return asgard_service.internals
+              .startDeployment(mock_api_client, launch_config_options)
+              .then(() => {
+                const expected_status_codes = send_request_stub.getCall(0).args[1];
+                expected_status_codes.should.eql([200]);
+              });
+        });
+
       });
 
-      it('should resolve with response from Asgard API', () => {
-        return asgard_service.internals
-            .startDeployment(mock_api_client, launch_config_options)
-            .should.be.fulfilledWith(mocked_asgard_response);
-      });
+      describe('when Asgard API fails', () => {
 
-      it('should expect status code 200 OK', () => {
-        return asgard_service.internals
-            .startDeployment(mock_api_client, launch_config_options)
-            .then(() => {
-              const expected_status_codes = send_request_stub.getCall(0).args[1];
-              expected_status_codes.should.eql([200]);
-            });
+        beforeEach(function stubSendRequest() {
+          const mock_err = error_factory.create(500, 'Mocked Asgard error');
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
+        });
+
+        it('should reject promise', () => {
+          return asgard_service.internals
+              .startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options)
+              .should.be.rejectedWith({ code: 500 });
+        });
+
       });
 
     });
@@ -212,41 +251,60 @@ describe(__filename, () => {
 
   describe('internals.getDeployment', () => {
     let send_request_stub;
-    let mocked_asgard_response;
-
-    beforeEach(() => {
-      mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/get-deployment.json');
-    });
-
-    beforeEach(function stubSendRequest() {
-      send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
-    });
 
     describe('with valid deployment id', () => {
       const deployment_id = 1051;
 
-      it('should GET {host}/{region}/deployment/show/{deployment_id}.json', () => {
-        return asgard_service.internals
-            .getDeployment(mock_api_client, deployment_id)
-            .then(() => {
-              const req_params = send_request_stub.getCall(0).args[0];
-              req_params.should.have.property('json');
-              req_params.should.have.property('method', 'get');
-              req_params.should.have.property('endpoint_uri', `/deployment/show/${deployment_id}.json`);
-            });
+      describe('when Asgard API is healthy', () => {
+        let mocked_asgard_response;
+
+        beforeEach(() => {
+          mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/get-deployment.json');
+        });
+
+        beforeEach(function stubSendRequest() {
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
+        });
+
+        it('should GET {host}/{region}/deployment/show/{deployment_id}.json', () => {
+          return asgard_service.internals
+              .getDeployment(mock_api_client, deployment_id)
+              .then(() => {
+                const req_params = send_request_stub.getCall(0).args[0];
+                req_params.should.have.property('json');
+                req_params.should.have.property('method', 'get');
+                req_params.should.have.property('endpoint_uri', `/deployment/show/${deployment_id}.json`);
+              });
+        });
+
+        it('should expect status code 200 OK', () => {
+          return asgard_service.internals
+              .getDeployment(mock_api_client, deployment_id)
+              .then(() => {
+                const expected_status_codes = send_request_stub.getCall(0).args[1];
+                expected_status_codes.should.eql([200]);
+              });
+        });
+
+        it('should resolve with response from API', () => {
+          return asgard_service.internals.getDeployment(mock_api_client, deployment_id).should.be.fulfilledWith(mocked_asgard_response);
+        });
+
       });
 
-      it('should expect status code 200 OK', () => {
-        return asgard_service.internals
-            .getDeployment(mock_api_client, deployment_id)
-            .then(() => {
-              const expected_status_codes = send_request_stub.getCall(0).args[1];
-              expected_status_codes.should.eql([200]);
-            });
-      });
+      describe('when Asgard API fails', () => {
 
-      it('should resolve with response from API', () => {
-        return asgard_service.internals.getDeployment(mock_api_client, deployment_id).should.be.fulfilledWith(mocked_asgard_response);
+        beforeEach(function stubSendRequest() {
+          const mock_err = error_factory.create(500, 'Mocked Asgard error');
+          send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
+        });
+
+        it('should reject promise', () => {
+          return asgard_service.internals
+              .getDeployment(mock_api_client, deployment_id)
+              .should.be.rejectedWith({ code: 500 });
+        });
+
       });
 
     });
@@ -272,7 +330,7 @@ internals.mockAsgOptions = function() {
     subnetPurpose: 'internal',
     terminationPolicies: ['Default'],
     tags: [],
-    suspendedProcesses: []
+    suspendedProcesses: [],
   };
 };
 
@@ -292,6 +350,6 @@ internals.mockLaunchConfigOptions = function() {
     instancePriceType: 'ON_DEMAND',
     iamInstanceProfile: 'messenger',
     ebsOptimized: false,
-    associatePublicIpAddress: null
+    associatePublicIpAddress: null,
   };
 };
