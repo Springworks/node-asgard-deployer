@@ -1,7 +1,7 @@
 const api_client = require('@springworks/api-client');
-const asgard_service = require('../lib/asgard-service');
-const logger = require('../lib/logger');
-const fixture_loader = require('../test-util/fixture-loader');
+const asgard_service = require('../../lib/asgard-service');
+const logger = require('../../lib/logger');
+const fixture_loader = require('../../test-util/fixture-loader');
 const internals = {};
 
 describe(__filename, function() {

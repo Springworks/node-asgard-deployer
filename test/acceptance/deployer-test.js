@@ -1,6 +1,6 @@
-const deployer = require('../lib/deployer');
-const asgard_service = require('../lib/asgard-service');
-const asgard_fixtures = require('../test-util/asgard-fixtures');
+const deployer = require('../../lib/deployer');
+const asgard_service = require('../../lib/asgard-service');
+const asgard_fixtures = require('../../test-util/asgard-fixtures');
 
 describe(__filename, function() {
   let sinon_sandbox;
