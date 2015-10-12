@@ -35,29 +35,54 @@ describe(__filename, () => {
 
     describe('with valid env vars', () => {
 
-      describe('with valid cluster_name, wait_to_complete=false', () => {
+      describe('with valid cluster_name', () => {
         const cluster_name = 'milky-way';
-        const wait_to_complete = false;
 
-        it('should resolve Promise once deployment has started', () => {
-          return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).should.be.fulfilled();
+        describe('wait_to_complete=false', () => {
+          const wait_to_complete = false;
+
+          it('should resolve Promise once deployment has started', () => {
+            return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).should.be.fulfilled();
+          });
+
+          it('should use asgard-client to prepare deployment', () => {
+            return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).then(() => {
+              asgard_service_instance.prepareDeployment.should.have.callCount(1);
+              asgard_service_instance.prepareDeployment.getCall(0).args[0].should.eql(cluster_name);
+            });
+          });
+
+          it('should use asgard-client to start prepared deployment', () => {
+            return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).then(() => {
+              asgard_service_instance.startDeployment.should.have.callCount(1);
+
+              const start_deployment_args = asgard_service_instance.startDeployment.getCall(0).args;
+              start_deployment_args.should.have.length(3);
+              start_deployment_args[0].should.eql(cluster_name);
+            });
+          });
+
         });
 
-        it('should use asgard-client to prepare deployment', () => {
-          return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).then(() => {
-            asgard_service_instance.prepareDeployment.should.have.callCount(1);
-            asgard_service_instance.prepareDeployment.getCall(0).args[0].should.eql(cluster_name);
-          });
-        });
+        describe('wait_to_complete=true', () => {
+          const wait_to_complete = true;
+          let wait_until_deployment_complete_stub;
 
-        it('should use asgard-client to start prepared deployment', () => {
-          return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).then(() => {
-            asgard_service_instance.startDeployment.should.have.callCount(1);
-
-            const start_deployment_args = asgard_service_instance.startDeployment.getCall(0).args;
-            start_deployment_args.should.have.length(3);
-            start_deployment_args[0].should.eql(cluster_name);
+          beforeEach(function mockWaitUntilDeploymentComplete() {
+            wait_until_deployment_complete_stub = sinon_sandbox.stub(deployer.internals, 'waitUntilDeploymentComplete');
+            wait_until_deployment_complete_stub.returns(Promise.resolve());
           });
+
+          it('should resolve Promise once deployment has started', () => {
+            return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).should.be.fulfilled();
+          });
+
+          it('should invoke waitUntilDeploymentComplete()', () => {
+            return deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete).then(() => {
+              wait_until_deployment_complete_stub.should.have.callCount(1);
+            });
+          });
+
         });
 
       });
