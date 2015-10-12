@@ -11,9 +11,28 @@ Executes automated deployments in [Asgard](https://github.com/Netflix/asgard).
 
 ## Execution of deployment
 
+### Locally
+
+Install module:
+```
+npm i asgard-deployer
+```
+
 Create a new automated deployment based on the most recently created auto-scaling group in the cluster:
 ```sh
 node ./deploy.js "<cluster name>" <wait to complete>
 ```
 - `<cluster name>`: name of the Asgard cluster
 - `<wait to complete>`: `true | false`, deciding if process should be kept alive until entire deployment has completed (several minutes)
+
+### Globally
+
+Install module:
+```
+npm i -g asgard-deployer
+```
+
+Run from command line:
+```
+asgard-deployer "<cluster name>" <wait to complete>
+```

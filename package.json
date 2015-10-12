@@ -9,7 +9,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "bin": {
-    "asgard-deployer": "./deploy.js"
+    "asgard-deployer": "./bin/cli.js"
   },
   "engines": {
     "npm": ">=2.7.0"
