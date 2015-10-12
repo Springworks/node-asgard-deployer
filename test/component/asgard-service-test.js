@@ -4,7 +4,7 @@ const logger = require('../../lib/logger');
 const fixture_loader = require('../../test-util/fixture-loader');
 const internals = {};
 
-describe(__filename, function() {
+describe(__filename, () => {
   let mock_api_client;
   let sinon_sandbox;
 
@@ -20,7 +20,7 @@ describe(__filename, function() {
     mock_api_client = api_client.createClient({
       base_url: `http://localhost:3001/eu-west-1`,
       circuit_breaker_config: { source_name: 'test-source', target_name: 'test-target' },
-      logger: logger,
+      logger,
       opt_options: {
         opt_auth: {
           user: 'user',

@@ -2,7 +2,7 @@ const deployer = require('../../lib/deployer');
 const asgard_service = require('../../lib/asgard-service');
 const asgard_fixtures = require('../../test-util/asgard-fixtures');
 
-describe(__filename, function() {
+describe(__filename, () => {
   let sinon_sandbox;
   let asgard_service_instance;
   let deployer_instance;
