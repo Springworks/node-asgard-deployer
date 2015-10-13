@@ -1,6 +1,11 @@
-const log_path = require('path').join(__dirname, '..');
-const logger_factory = require('@springworks/logger-factory');
-const log_level = 'trace';
-const name = 'asgard-deployer';
+const bunyan = require('bunyan');
 
-module.exports = logger_factory.create(name, log_level, log_path);
+module.exports = bunyan.createLogger({
+  name: 'asgard-deployer',
+  streams: [
+    {
+      level: 'trace',
+      stream: process.stdout,
+    },
+  ],
+});
