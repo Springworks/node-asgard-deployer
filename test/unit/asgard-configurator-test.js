@@ -26,6 +26,27 @@ describe(__filename, () => {
 
     });
 
+    describe('with excessive parameters', () => {
+      let valid_env_vars;
+      let variables;
+
+      beforeEach(() => {
+        valid_env_vars = internals.createValidEnvVars();
+        variables = valid_env_vars;
+        variables.foo = 'foo';
+      });
+
+      it('should strip unknown (since there are lots of other env vars)', () => {
+        const validated = asgard_config.createConfigFromEnvVars(variables);
+        validated.should.have.keys([
+            'host',
+            'aws_region',
+            'basic_auth',
+        ]);
+      });
+
+    });
+
     describe('missing env vars', () => {
       const required_variables = [
         'NODE_ASGARD_DEPLOYER_ASGARD_HOST',

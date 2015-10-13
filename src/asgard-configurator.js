@@ -11,7 +11,7 @@ const internals = {
 };
 
 exports.createConfigFromEnvVars = function(env_vars) {
-  const validated = input_validator.validateSchema(env_vars, internals.env_vars_validation_schema);
+  const validated = input_validator.validateSchema(env_vars, internals.env_vars_validation_schema, null, { stripUnknown: true });
   const config = {
     host: validated.NODE_ASGARD_DEPLOYER_ASGARD_HOST,
     aws_region: validated.NODE_ASGARD_DEPLOYER_AWS_REGION,
