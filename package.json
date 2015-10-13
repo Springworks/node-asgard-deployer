@@ -1,6 +1,6 @@
 {
   "name": "asgard-deployer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Executes automated deployments in Asgard",
   "main": "deploy.js",
   "scripts": {
