@@ -39,6 +39,9 @@ internals.prepareDeployment = function(api_client, cluster_name) {
       includeEnvironment: true,
     },
   };
+
+  logger.info(req_opts, 'prepareDeployment');
+
   return api_client.sendRequest(req_opts, [200]);
 };
 
@@ -50,6 +53,9 @@ internals.startDeployment = function(api_client, cluster_name, launch_config_opt
     endpoint_uri: '/deployment/start',
     json: req_body,
   };
+
+  logger.info(req_opts, 'startDeployment');
+
   return api_client.sendRequest(req_opts, [200]);
 };
 
@@ -95,6 +101,9 @@ internals.getDeployment = function(api_client, deployment_id) {
     endpoint_uri: `/deployment/show/${deployment_id}.json`,
     json: true,
   };
+
+  logger.info(req_opts, 'getDeployment');
+
   return api_client.sendRequest(req_opts, [200]);
 };
 
