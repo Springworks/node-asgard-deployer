@@ -1,5 +1,6 @@
-.idea/**
-coverage/**
-node_modules/**
-scripts/**
-packages/**
+.idea
+coverage
+node_modules
+scripts
+packages
+lib
