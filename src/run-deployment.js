@@ -1,38 +1,37 @@
 const deployer = require('./deployer');
 const asgard_service = require('./asgard-service');
 const asgard_configurator = require('./asgard-configurator');
+const logger = require('./logger');
 const internals = {
 
   run(cluster_name, wait_to_complete) {
-    console.log('');
-    console.log('Starting deployment of cluster: %s', cluster_name);
-    console.log('(wait_to_complete=%s)', wait_to_complete);
-    console.log('');
+    logger.info({
+      cluster_name,
+      wait_to_complete,
+    }, 'Starting deployment of cluster');
 
-    const asgard_config = asgard_configurator.createConfigFromEnvVars(process.env);
-    const asgard_service_instance = asgard_service.create(asgard_config.host,
-        asgard_config.region,
-        asgard_config.basic_auth);
-
-    const deployer_instance = deployer.create(asgard_service_instance);
-    deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete)
+    Promise
+        .resolve(process.env)
+        .then(asgard_configurator.createConfigFromEnvVars)
+        .catch(err => {
+          logger.error(err, 'Failed to validate environment variables');
+          throw err;
+        })
+        .then(asgard_config => asgard_service.create(asgard_config.host, asgard_config.region, asgard_config.basic_auth))
+        .then(asgard_service_instance => deployer.create(asgard_service_instance))
+        .then(deployer_instance => deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete))
         .then(() => {
-          console.log('Done');
+          logger.info('Done');
           process.exit(0);
         })
         .catch(err => {
-          console.warn('Deployment failed, err:', err);
+          logger.error(err, 'Deployment failed!');
           process.exit(1);
         });
   },
+
 };
 
 const cluster_name_arg = process.argv[2];
 const wait_to_complete = process.argv[3] === 'true';
 internals.run(cluster_name_arg, wait_to_complete);
-
-
-/* istanbul ignore else */
-if (process.env.NODE_ENV === 'test') {
-  exports.internals = internals;
-}
