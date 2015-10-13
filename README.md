@@ -36,3 +36,6 @@ Run from command line:
 ```
 asgard-deployer "<cluster name>" <wait to complete>
 ```
+
+## Development
+The library is built using ES6, but code is generated to ES5 by [Babel](https://babeljs.io).
