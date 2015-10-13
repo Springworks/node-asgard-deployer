@@ -1,5 +1,5 @@
-const deployer = require('../../lib/deployer');
-const asgard_service = require('../../lib/asgard-service');
+const deployer = require('../../src/deployer');
+const asgard_service = require('../../src/asgard-service');
 const asgard_fixtures = require('../../test-util/asgard-fixtures');
 
 describe(__filename, () => {

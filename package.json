@@ -4,6 +4,8 @@
   "description": "Executes automated deployments in Asgard",
   "main": "deploy.js",
   "scripts": {
+    "prepublish": "npm run build",
+    "build": "rm -rf lib && babel src --out-dir lib",
     "lint": "eslint .",
     "test": "NODE_ENV=test istanbul cover _mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
@@ -30,12 +32,12 @@
     "eslint-plugin-mocha": "1.0.0",
     "eslint-plugin-should-promised": "^1.0.5",
     "istanbul": "^0.3.21",
+    "babel": "^5.8.23",
     "mocha": "^2.3.3"
   },
   "dependencies": {
     "@springworks/api-client": "^5.0.2",
     "@springworks/logger-factory": "^3.1.2",
-    "bluebird": "^2.10.2",
-    "babel": "^5.8.23"
+    "bluebird": "^2.10.2"
   }
 }
