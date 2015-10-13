@@ -23,7 +23,6 @@ pids
 logs
 results
 
-npm-debug.log
 node_modules
 
 # IntelliJ
@@ -33,3 +32,6 @@ node_modules
 coverage
 
 /config/runtime.json
+
+# Ignore build output
+lib
