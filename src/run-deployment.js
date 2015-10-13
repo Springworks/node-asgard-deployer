@@ -1,5 +1,6 @@
 const deployer = require('./deployer');
 const asgard_service = require('./asgard-service');
+const asgard_configurator = require('./asgard-configurator');
 const internals = {
 
   run(cluster_name, wait_to_complete) {
@@ -8,10 +9,10 @@ const internals = {
     console.log('(wait_to_complete=%s)', wait_to_complete);
     console.log('');
 
-    const asgard_basic_auth = internals.parseBasicAuth();
-    const asgard_service_instance = asgard_service.create(process.env.NODE_ASGARD_DEPLOYER_ASGARD_HOST,
-        process.env.NODE_ASGARD_DEPLOYER_AWS_REGION,
-        asgard_basic_auth);
+    const asgard_config = asgard_configurator.createConfigFromEnvVars(process.env);
+    const asgard_service_instance = asgard_service.create(asgard_config.host,
+        asgard_config.region,
+        asgard_config.basic_auth);
 
     const deployer_instance = deployer.create(asgard_service_instance);
     deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete)
@@ -24,19 +25,14 @@ const internals = {
           process.exit(1);
         });
   },
-
-  parseBasicAuth() {
-    if (process.env.NODE_ASGARD_DEPLOYER_ASGARD_USERNAME && process.env.NODE_ASGARD_DEPLOYER_ASGARD_PASSWORD) {
-      return {
-        username: process.env.NODE_ASGARD_DEPLOYER_ASGARD_USERNAME,
-        password: process.env.NODE_ASGARD_DEPLOYER_ASGARD_PASSWORD,
-      };
-    }
-    return undefined;
-  },
-
 };
 
 const cluster_name_arg = process.argv[2];
 const wait_to_complete = process.argv[3] === 'true';
 internals.run(cluster_name_arg, wait_to_complete);
+
+
+/* istanbul ignore else */
+if (process.env.NODE_ENV === 'test') {
+  exports.internals = internals;
+}
