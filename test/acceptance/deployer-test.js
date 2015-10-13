@@ -87,6 +87,15 @@ describe(__filename, () => {
 
       });
 
+      describe('without cluster_name', () => {
+        let cluster_name;
+
+        it('should fail', () => {
+          return deployer_instance.makeDeploymentInCluster(cluster_name, false).should.be.rejected();
+        });
+
+      });
+
     });
 
   });
