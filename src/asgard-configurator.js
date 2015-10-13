@@ -4,9 +4,9 @@ const joi = input_validator.joi;
 const internals = {
   env_vars_validation_schema: joi.object().required().keys({
     NODE_ASGARD_DEPLOYER_ASGARD_HOST: joi.string().required(),
-    NODE_ASGARD_DEPLOYER_ASGARD_PASSWORD: joi.string().required(),
-    NODE_ASGARD_DEPLOYER_ASGARD_USERNAME: joi.string().required(),
     NODE_ASGARD_DEPLOYER_AWS_REGION: joi.string().required(),
+    NODE_ASGARD_DEPLOYER_ASGARD_PASSWORD: joi.string().optional(),
+    NODE_ASGARD_DEPLOYER_ASGARD_USERNAME: joi.string().optional(),
   }),
 };
 
