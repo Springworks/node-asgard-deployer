@@ -30,6 +30,7 @@ internals.makeDeploymentInCluster = function(asgard_client, cluster_name, wait_u
       })
       .catch(err => {
         logger.error(err, 'makeDeploymentInCluster failed');
+        throw err;
       });
 };
 
