@@ -10,6 +10,7 @@ const internals = {
     error_threshold: 50,
     volume_threshold: 5,
   },
+  asgard_request_timeout: 15000
 };
 
 exports.create = function(asgard_host, aws_region, opt_basic_auth) {
@@ -19,6 +20,7 @@ exports.create = function(asgard_host, aws_region, opt_basic_auth) {
     logger,
     opt_options: {
       opt_auth: opt_basic_auth,
+      opt_timeout: internals.asgard_request_timeout,
     },
   });
 
