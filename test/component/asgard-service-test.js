@@ -158,13 +158,13 @@ describe(__filename, () => {
 
         it('should resolve with response from Asgard API', () => {
           return asgard_service.internals
-              .startDeployment(mock_api_client, launch_config_options)
+              .startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options)
               .should.be.fulfilledWith(mocked_asgard_response);
         });
 
         it('should expect status code 200 OK', () => {
           return asgard_service.internals
-              .startDeployment(mock_api_client, launch_config_options)
+              .startDeployment(mock_api_client, cluster_name, launch_config_options, asg_options)
               .then(() => {
                 const expected_status_codes = send_request_stub.getCall(0).args[1];
                 expected_status_codes.should.eql([200]);
@@ -209,7 +209,7 @@ describe(__filename, () => {
         opts.deploymentOptions.should.have.property('clusterName', cluster_name);
       });
 
-      it('should define deployment options for zero-downtime deployment', () => {
+      it('should define deployment options for zero-downtime deployment, using same capacity', () => {
         const opts = asgard_service.internals.provideDeploymentRequestBody(cluster_name, launch_config_options, asg_options);
         const zero_downtime_steps = [
           {
@@ -218,7 +218,7 @@ describe(__filename, () => {
           {
             type: 'Resize',
             targetAsg: 'Next',
-            capacity: 2,
+            capacity: asg_options.desiredCapacity,
             startUpTimeoutMinutes: 20,
           },
           {

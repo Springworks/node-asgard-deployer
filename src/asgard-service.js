@@ -74,7 +74,7 @@ internals.provideDeploymentRequestBody = function(cluster_name, launch_config_op
         {
           type: 'Resize',
           targetAsg: 'Next',
-          capacity: 2,
+          capacity: asg_options.desiredCapacity,
           startUpTimeoutMinutes: 20,
         },
         {
