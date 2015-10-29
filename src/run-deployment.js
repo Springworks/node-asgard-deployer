@@ -17,7 +17,7 @@ const internals = {
           logger.error(err, 'Failed to validate environment variables');
           throw err;
         })
-        .then(asgard_config => asgard_service.create(asgard_config.host, asgard_config.region, asgard_config.basic_auth))
+        .then(asgard_config => asgard_service.create(asgard_config.host, asgard_config.aws_region, asgard_config.basic_auth))
         .then(asgard_service_instance => deployer.create(asgard_service_instance))
         .then(deployer_instance => deployer_instance.makeDeploymentInCluster(cluster_name, wait_to_complete))
         .then(() => {
