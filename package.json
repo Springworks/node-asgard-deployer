@@ -36,7 +36,7 @@
     "mocha": "^2.3.3"
   },
   "dependencies": {
-    "@springworks/api-client": "^5.0.2",
+    "@springworks/api-client": "^5.1.0",
     "@springworks/input-validator": "^3.1.1",
     "bluebird": "^2.10.2",
     "bunyan": "^1.5.1"
