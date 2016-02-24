@@ -1,3 +1,4 @@
+import { createError } from '@springworks/error-factory';
 const logger = require('./logger');
 const bluebird = require('bluebird');
 const internals = {
@@ -52,7 +53,19 @@ internals.waitUntilDeploymentComplete = function(asgard_client, check_interval_m
 
 internals.isDeploymentComplete = function(asgard_client, deployment_id) {
   return asgard_client.getDeployment(deployment_id).then(deployment => {
-    return deployment.done;
+    const is_done = deployment.done;
+
+    if (is_done && deployment.status === 'failed') {
+      logger.warn({
+        deployment: deployment,
+      }, 'Asgard deployment failed');
+      throw createError({
+        code: 500,
+        message: 'Deployment failed',
+      });
+    }
+
+    return is_done;
   });
 };
 

@@ -86,16 +86,39 @@ describe(__filename, () => {
 
       describe('when deployment property "done=true"', () => {
 
-        beforeEach(() => {
-          const fixture = asgard_fixtures.getDeployment();
-          fixture.done = true;
-          sinon_sandbox
-              .stub(asgard_service_instance, 'getDeployment')
-              .returns(Promise.resolve(fixture));
+        describe('when deployment succeeded', () => {
+
+          beforeEach(() => {
+            const fixture = asgard_fixtures.getDeployment();
+            fixture.done = true;
+            sinon_sandbox
+                .stub(asgard_service_instance, 'getDeployment')
+                .returns(Promise.resolve(fixture));
+          });
+
+          it('should resolve with true', () => {
+            return deployer.internals.isDeploymentComplete(asgard_service_instance, deployment_id).should.be.fulfilledWith(true);
+          });
+
         });
 
-        it('should resolve with true', () => {
-          return deployer.internals.isDeploymentComplete(asgard_service_instance, deployment_id).should.be.fulfilledWith(true);
+        describe('when deployment failed', () => {
+
+          beforeEach(() => {
+            const fixture = asgard_fixtures.getFailedDeployment();
+            fixture.done = true;
+            sinon_sandbox
+                .stub(asgard_service_instance, 'getDeployment')
+                .returns(Promise.resolve(fixture));
+          });
+
+          it('should reject with error', () => {
+            return deployer.internals.isDeploymentComplete(asgard_service_instance, deployment_id).should.be.rejectedWith({
+              code: 500,
+              message: 'Deployment failed',
+            });
+          });
+
         });
 
       });
