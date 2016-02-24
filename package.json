@@ -23,22 +23,22 @@
   "author": "Springworks",
   "license": "MIT",
   "devDependencies": {
-    "@springworks/error-factory": "^1.2.10",
     "@springworks/test-harness": "1.0.3",
-    "babel-eslint": "^4.1.2",
-    "coveralls": "^2.11.4",
+    "babel": "5.8.23",
+    "babel-eslint": "4.1.7",
+    "coveralls": "2.11.4",
     "eslint": "1.5.1",
     "eslint-config-springworks": "3.1.1",
     "eslint-plugin-mocha": "1.0.0",
-    "eslint-plugin-should-promised": "^1.0.5",
-    "istanbul": "^0.3.21",
-    "babel": "^5.8.23",
-    "mocha": "^2.3.3"
+    "eslint-plugin-should-promised": "1.0.5",
+    "istanbul": "0.3.21",
+    "mocha": "2.3.3"
   },
   "dependencies": {
-    "@springworks/api-client": "^5.1.0",
-    "@springworks/input-validator": "^3.1.1",
-    "bluebird": "^2.10.2",
-    "bunyan": "^1.5.1"
+    "@springworks/error-factory": "2.0.3",
+    "@springworks/api-client": "5.1.0",
+    "@springworks/input-validator": "3.1.1",
+    "bluebird": "2.10.2",
+    "bunyan": "1.5.1"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "id": "2505",
+  "clusterName": "userapi-user",
+  "region": "eu-west-1",
+  "workflowExecution": {
+    "workflowId": "a16d0142-ef27-491e-a944-4e2065b61866",
+    "runId": "22cq253M/yqTBhm3JvhpMh6VjNp2TAMNl9AhKkIFx5Xt4="
+  },
+  "description": "Deploying new ASG to cluster 'userapi-user'",
+  "owner": null,
+  "startTime": 1456314349000,
+  "updateTime": 1456314353000,
+  "status": "failed",
+  "log": ["2016-02-24_11:45:50 {\"step\":0}", "2016-02-24_11:45:50 Creating Launch Configuration 'userapi-user-v008-20160224114549'.", "2016-02-24_11:45:51 Deployment was rolled back due to error: com.amazonaws.services.simpleworkflow.flow.ActivityTaskFailedException: Status Code: 400, AWS Service: AmazonAutoScaling, AWS Request ID: 27036900-daec-11e5-a7a2-bfc6a6e85515, AWS Error Code: LimitExceeded, AWS Error Message: Launch Configuration limit exceeded - You may only have 400 launch configurations for activityId=\"3\" of activityType={Name: DeploymentActivities.createLaunchConfigForNextAsg,Version: 1.9}", "2016-02-24_11:45:53 Status Code: 400, AWS Service: AmazonAutoScaling, AWS Request ID: 28322589-daec-11e5-9632-6b8fd1833764, AWS Error Code: ValidationError, AWS Error Message: AutoScalingGroup name not found - no such group: userapi-user-v008 for activityId=\"6\" of activityTyp"],
+  "steps": [{
+    "type": "CreateAsg"
+  }, {
+    "type": "Resize",
+    "targetAsg": "Next",
+    "capacity": 2,
+    "startUpTimeoutMinutes": 20
+  }, {
+    "type": "Wait",
+    "durationMinutes": 5,
+    "description": null
+  }, {
+    "type": "DisableAsg",
+    "targetAsg": "Previous"
+  }, {
+    "type": "DeleteAsg",
+    "targetAsg": "Previous"
+  }],
+  "token": null,
+  "done": true,
+  "regionCode": "eu-west-1",
+  "logForSteps": [
+    ["2016-02-24_11:45:50 Creating Launch Configuration 'userapi-user-v008-20160224114549'.", "2016-02-24_11:45:51 Deployment was rolled back due to error: com.amazonaws.services.simpleworkflow.flow.ActivityTaskFailedException: Status Code: 400, AWS Service: AmazonAutoScaling, AWS Request ID: 27036900-daec-11e5-a7a2-bfc6a6e85515, AWS Error Code: LimitExceeded, AWS Error Message: Launch Configuration limit exceeded - You may only have 400 launch configurations for activityId=\"3\" of activityType={Name: DeploymentActivities.createLaunchConfigForNextAsg,Version: 1.9}", "2016-02-24_11:45:53 Status Code: 400, AWS Service: AmazonAutoScaling, AWS Request ID: 28322589-daec-11e5-9632-6b8fd1833764, AWS Error Code: ValidationError, AWS Error Message: AutoScalingGroup name not found - no such group: userapi-user-v008 for activityId=\"6\" of activityTyp"]
+  ],
+  "durationString": "4s"
+}

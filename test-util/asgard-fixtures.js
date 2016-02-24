@@ -11,3 +11,8 @@ export function startDeployment() {
 export function getDeployment() {
   return fixture_loader.loadFixture('./test-util/fixtures/asgard/get-deployment.json');
 }
+
+
+export function getFailedDeployment() {
+  return fixture_loader.loadFixture('./test-util/fixtures/asgard/get-failed-deployment.json');
+}
