@@ -1,0 +1,62 @@
+{
+  "id": "3284",
+  "clusterName": "spapi-partners",
+  "region": "eu-west-1",
+  "workflowExecution": {
+    "workflowId": "c493f96f-3311-459a-87c4-13ffc17bb81f",
+    "runId": "220TFvRn2n3HdkdDs0/23K37wGPGtNNS400m2VQ54z/q8="
+  },
+  "description": "Deploying new ASG to cluster 'spapi-partners'",
+  "owner": null,
+  "startTime": 1464614680000,
+  "updateTime": 1464615924000,
+  "status": "completed",
+  "log": [
+    "2016-05-30_13:24:41 {\"step\":0}",
+    "2016-05-30_13:24:41 Creating Launch Configuration 'spapi-partners-v112-20160530132440'.",
+    "2016-05-30_13:24:42 Creating Auto Scaling Group 'spapi-partners-v112' initially with 0 instances.",
+    "2016-05-30_13:25:09 Copying Scaling Policies and Scheduled Actions.",
+    "2016-05-30_13:25:11 {\"step\":1}",
+    "2016-05-30_13:25:11 Waiting up to 20 minutes while resizing to 2 instances.",
+    "2016-05-30_13:45:19 Deployment was rolled back. ASG 'spapi-partners-v112' was not at capacity after 20 minutes."
+  ],
+  "steps": [
+    {
+      "type": "CreateAsg"
+    },
+    {
+      "type": "Resize",
+      "targetAsg": "Next",
+      "capacity": 2,
+      "startUpTimeoutMinutes": 20
+    },
+    {
+      "type": "Wait",
+      "durationMinutes": 5,
+      "description": null
+    },
+    {
+      "type": "DisableAsg",
+      "targetAsg": "Previous"
+    },
+    {
+      "type": "DeleteAsg",
+      "targetAsg": "Previous"
+    }
+  ],
+  "token": null,
+  "done": true,
+  "regionCode": "eu-west-1",
+  "logForSteps": [
+    [
+      "2016-05-30_13:24:41 Creating Launch Configuration 'spapi-partners-v112-20160530132440'.",
+      "2016-05-30_13:24:42 Creating Auto Scaling Group 'spapi-partners-v112' initially with 0 instances.",
+      "2016-05-30_13:25:09 Copying Scaling Policies and Scheduled Actions."
+    ],
+    [
+      "2016-05-30_13:25:11 Waiting up to 20 minutes while resizing to 2 instances.",
+      "2016-05-30_13:45:19 Deployment was rolled back. ASG 'spapi-partners-v112' was not at capacity after 20 minutes."
+    ]
+  ],
+  "durationString": "20m 44s"
+}

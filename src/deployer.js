@@ -55,7 +55,11 @@ internals.isDeploymentComplete = function(asgard_client, deployment_id) {
   return asgard_client.getDeployment(deployment_id).then(deployment => {
     const is_done = deployment.done;
 
-    if (is_done && deployment.status === 'failed') {
+    if (!is_done) {
+      return false;
+    }
+
+    if (deployment.status === 'failed') {
       logger.warn({
         deployment: deployment,
       }, 'Asgard deployment failed');
@@ -64,11 +68,26 @@ internals.isDeploymentComplete = function(asgard_client, deployment_id) {
         message: 'Deployment failed',
       });
     }
+    else if (logContainsRollbackFailure(deployment.log)) {
+      logger.warn({
+        deployment: deployment,
+      }, 'Asgard deployment rolled back');
+      throw createError({
+        code: 500,
+        message: 'Deployment rolled back',
+      });
+    }
 
-    return is_done;
+    return true;
   });
 };
 
+function logContainsRollbackFailure(log_messages) {
+  return log_messages.some(message => {
+    const rollback_log_message_part = 'Deployment was rolled back';
+    return message.indexOf(rollback_log_message_part) >= 0;
+  });
+}
 
 /* istanbul ignore else */
 if (process.env.NODE_ENV === 'test') {

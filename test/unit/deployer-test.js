@@ -121,6 +121,25 @@ describe(__filename, () => {
 
         });
 
+        describe('when deployment completed, but was rolled back', () => {
+
+          beforeEach(() => {
+            const fixture = asgard_fixtures.getRolledBackDeployment();
+            fixture.done = true;
+            sinon_sandbox
+                .stub(asgard_service_instance, 'getDeployment')
+                .returns(Promise.resolve(fixture));
+          });
+
+          it('should reject with error', () => {
+            return deployer.internals.isDeploymentComplete(asgard_service_instance, deployment_id).should.be.rejectedWith({
+              code: 500,
+              message: 'Deployment rolled back',
+            });
+          });
+
+        });
+
       });
 
     });
