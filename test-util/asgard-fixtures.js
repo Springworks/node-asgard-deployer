@@ -12,7 +12,10 @@ export function getDeployment() {
   return fixture_loader.loadFixture('./test-util/fixtures/asgard/get-deployment.json');
 }
 
-
 export function getFailedDeployment() {
   return fixture_loader.loadFixture('./test-util/fixtures/asgard/get-failed-deployment.json');
+}
+
+export function getRolledBackDeployment() {
+  return fixture_loader.loadFixture('./test-util/fixtures/asgard/get-rolled-back-deployment.json');
 }
