@@ -5,7 +5,7 @@ const fixture_loader = require('../../test-util/fixture-loader');
 const error_factory = require('@springworks/error-factory');
 const internals = {};
 
-describe(__filename, () => {
+describe('test/component/asgard-service-test.js', () => {
   let mock_api_client;
   let sinon_sandbox;
 
@@ -17,9 +17,9 @@ describe(__filename, () => {
     sinon_sandbox.restore();
   });
 
-  beforeEach(function createMockApiClient() {
+  beforeEach(() => {
     mock_api_client = api_client.createClient({
-      base_url: `http://localhost:3001/eu-west-1`,
+      base_url: 'http://localhost:3001/eu-west-1',
       circuit_breaker_config: { source_name: 'test-source', target_name: 'test-target' },
       logger,
       opt_options: {
@@ -62,7 +62,7 @@ describe(__filename, () => {
           mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/prepare-deployment.json');
         });
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
         });
 
@@ -96,7 +96,7 @@ describe(__filename, () => {
 
       describe('when Asgard API fails', () => {
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           const mock_err = error_factory.create(500, 'Mocked Asgard error');
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
         });
@@ -133,7 +133,7 @@ describe(__filename, () => {
           mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/start-deployment.json');
         });
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
         });
 
@@ -173,7 +173,7 @@ describe(__filename, () => {
 
       describe('when Asgard API fails', () => {
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           const mock_err = error_factory.create(500, 'Mocked Asgard error');
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
         });
@@ -260,7 +260,7 @@ describe(__filename, () => {
           mocked_asgard_response = fixture_loader.loadFixture('./test-util/fixtures/asgard/get-deployment.json');
         });
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.resolve(mocked_asgard_response));
         });
 
@@ -292,7 +292,7 @@ describe(__filename, () => {
 
       describe('when Asgard API fails', () => {
 
-        beforeEach(function stubSendRequest() {
+        beforeEach(() => {
           const mock_err = error_factory.create(500, 'Mocked Asgard error');
           send_request_stub = sinon_sandbox.stub(mock_api_client, 'sendRequest').returns(Promise.reject(mock_err));
         });

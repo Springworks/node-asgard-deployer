@@ -28,6 +28,7 @@ internals.makeDeploymentInCluster = function(asgard_client, cluster_name, wait_u
           logger.info({ deployment }, 'Waiting for deployment to complete');
           return internals.waitUntilDeploymentComplete(asgard_client, internals.STATUS_CHECK_TIMEOUT_MS, deployment.deploymentId);
         }
+        return null;
       })
       .catch(err => {
         logger.error(err, 'makeDeploymentInCluster failed');
@@ -47,6 +48,7 @@ internals.waitUntilDeploymentComplete = function(asgard_client, check_interval_m
           });
         }
         logger.info({ deployment_id }, 'Deployment completed!');
+        return null;
       });
 };
 

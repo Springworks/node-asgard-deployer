@@ -1,7 +1,7 @@
 const asgard_config = require('../../src/asgard-configurator');
 const internals = {};
 
-describe(__filename, () => {
+describe('test/unit/asgard-configurator-test.js', () => {
 
   describe('createConfigFromEnvVars', () => {
 

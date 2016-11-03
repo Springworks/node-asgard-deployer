@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "rm -rf lib && babel src --out-dir lib",
-    "lint": "eslint .",
+    "lint": "eslint --cache .",
     "test": "NODE_ENV=test istanbul cover _mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
@@ -32,8 +32,10 @@
     "coveralls": "2.11.14",
     "eslint": "3.9.1",
     "eslint-config-springworks": "7.0.6",
+    "eslint-plugin-import": "2.0.1",
     "eslint-plugin-mocha": "4.7.0",
     "eslint-plugin-should-promised": "2.0.0",
+    "eslint-plugin-springworks": "2.0.1",
     "istanbul": "0.4.5",
     "mocha": "3.1.2"
   },
