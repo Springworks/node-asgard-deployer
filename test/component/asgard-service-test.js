@@ -40,11 +40,9 @@ describe(__filename, () => {
         const aws_region = 'eu-west-1';
         const basic_auth = { username: 'user', password: 'secret' };
         const service = asgard_service.create(asgard_host, aws_region, basic_auth);
-        service.should.have.keys([
-          'prepareDeployment',
-          'startDeployment',
-          'getDeployment',
-        ]);
+        service.should.have.keys('prepareDeployment',
+            'startDeployment',
+            'getDeployment');
       });
 
     });

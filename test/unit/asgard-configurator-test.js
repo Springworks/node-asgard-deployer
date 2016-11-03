@@ -57,11 +57,9 @@ describe(__filename, () => {
 
       it('should strip unknown (since there are lots of other env vars)', () => {
         const validated = asgard_config.createConfigFromEnvVars(variables);
-        validated.should.have.keys([
-            'host',
+        validated.should.have.keys('host',
             'aws_region',
-            'basic_auth',
-        ]);
+            'basic_auth');
       });
 
     });
