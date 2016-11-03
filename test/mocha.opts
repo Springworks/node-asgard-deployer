@@ -4,4 +4,4 @@
 --slow 200
 --reporter spec
 --require @springworks/test-harness
---compilers js:babel/register
+--compilers js:babel-register

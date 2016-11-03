@@ -24,8 +24,11 @@
   "license": "MIT",
   "devDependencies": {
     "@springworks/test-harness": "1.5.1",
-    "babel": "6.5.2",
+    "babel-cli": "6.18.0",
     "babel-eslint": "7.1.0",
+    "babel-plugin-transform-strict-mode": "6.18.0",
+    "babel-preset-es2015-node4": "2.1.0",
+    "babel-register": "6.18.0",
     "coveralls": "2.11.14",
     "eslint": "3.9.1",
     "eslint-config-springworks": "7.0.6",
