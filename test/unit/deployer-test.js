@@ -2,7 +2,7 @@ const deployer = require('../../src/deployer');
 const asgard_service = require('../../src/asgard-service');
 const asgard_fixtures = require('../../test-util/asgard-fixtures');
 
-describe(__filename, () => {
+describe('test/unit/deployer-test.js', () => {
   let sinon_sandbox;
   let asgard_service_instance;
 
@@ -14,7 +14,7 @@ describe(__filename, () => {
     sinon_sandbox.restore();
   });
 
-  beforeEach(function createMockAsgardClient() {
+  beforeEach(() => {
     asgard_service_instance = asgard_service.create('http://localhost:3000', 'eu-west-1');
   });
 
@@ -31,13 +31,13 @@ describe(__filename, () => {
           get_deployment_stub = sinon_sandbox.stub(asgard_service_instance, 'getDeployment');
         });
 
-        beforeEach(function mockFirstCallToBeNotDone() {
+        beforeEach(() => {
           const fixture = asgard_fixtures.getDeployment();
           fixture.done = false;
           get_deployment_stub.onCall(0).returns(Promise.resolve(fixture));
         });
 
-        beforeEach(function mockSecondCallToBeDone() {
+        beforeEach(() => {
           const fixture = asgard_fixtures.getDeployment();
           fixture.done = true;
           get_deployment_stub.onCall(1).returns(Promise.resolve(fixture));

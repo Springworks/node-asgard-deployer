@@ -18,6 +18,6 @@ internals.loadJsonFixture = function(fixture_filename) {
 
 
 internals.loadFixtureFile = function(fixture_filename) {
-  var resolved_path = path.resolve(fixture_filename);
+  const resolved_path = path.resolve(fixture_filename);
   return fs.readFileSync(resolved_path, { encoding: 'utf-8' });
 };

@@ -1,6 +1,5 @@
 .idea
+.iml
 coverage
 node_modules
-scripts
-packages
 lib
