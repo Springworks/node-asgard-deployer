@@ -44,6 +44,6 @@
     "@springworks/api-client": "6.1.8",
     "@springworks/input-validator": "4.0.27",
     "bluebird": "3.4.6",
-    "bunyan": "1.8.4"
+    "bunyan": "1.8.5"
   }
 }
