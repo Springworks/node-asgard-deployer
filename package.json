@@ -42,7 +42,7 @@
   "dependencies": {
     "@springworks/error-factory": "2.0.9",
     "@springworks/api-client": "6.1.8",
-    "@springworks/input-validator": "4.0.27",
+    "@springworks/input-validator": "4.1.0",
     "bluebird": "3.4.6",
     "bunyan": "1.8.5"
   }
