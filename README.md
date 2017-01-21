@@ -1,5 +1,7 @@
 # Asgard Deployer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Springworks/node-asgard-deployer.svg)](https://greenkeeper.io/)
+
 Executes automated deployments in [Asgard](https://github.com/Netflix/asgard).
 
 ## Environment variables
