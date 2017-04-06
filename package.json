@@ -31,7 +31,7 @@
     "babel-register": "6.22.0",
     "coveralls": "2.11.16",
     "eslint": "3.17.1",
-    "eslint-config-springworks": "7.0.7",
+    "eslint-config-springworks": "7.0.8",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-mocha": "4.8.0",
     "eslint-plugin-should-promised": "2.0.0",
