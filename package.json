@@ -26,7 +26,7 @@
     "@springworks/test-harness": "^1.5.5",
     "babel-cli": "^6.23.0",
     "babel-eslint": "^7.1.1",
-    "babel-plugin-transform-strict-mode": "^6.22.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-es2015-node4": "^2.1.1",
     "babel-register": "^6.22.0",
     "coveralls": "^2.11.16",
